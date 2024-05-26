@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "billingAddress": {
+      "type": "string",
+      "required": true
+    },
+    "shippingAddress": {
+      "type": "string",
+      "required": true
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "taxID": {
+      "type": "string"
+    },
+    "paymentMethod": {
+      "type": "enumeration",
+      "enum": [
+        "Cash On Delivery",
+        "Card",
+        "Bank Transfer"
+      ]
+    },
+    "totalAmount": {
+      "type": "decimal"
+    },
+    "orderDetails": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.order-details"
+    }
+  }
+}

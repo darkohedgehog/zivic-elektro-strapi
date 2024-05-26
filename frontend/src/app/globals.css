@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+  
+
+html{
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    @apply bg-[#fff]
+}
+
+.dark body {
+    @apply bg-[#1b1b1b]
+}
+
+/* Definiranje prilagođene klase u globalnom CSS fajlu 
+@layer utilities {
+    .dark body {
+      background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(151,41,247,1) 0%, rgba(24,22,39,1) 90%);
+    }
+  }*/
