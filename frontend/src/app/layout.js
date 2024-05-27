@@ -21,7 +21,6 @@ export default function RootLayout({ children }) {
 
   return (
     <ClerkProvider localization={hrTranslations}>
-      <Layout>
       <html lang="hr" suppressHydrationWarning>
         <body className={inter.className}>
           <ThemeProvider
@@ -29,13 +28,14 @@ export default function RootLayout({ children }) {
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange>
+              <Layout>
             <Nav />
             {children}
             <Footer />
+            </Layout>
           </ThemeProvider>
         </body>
       </html>
-      </Layout>
     </ClerkProvider>
   );
 }

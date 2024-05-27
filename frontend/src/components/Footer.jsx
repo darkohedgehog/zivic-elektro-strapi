@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Logo from './Logo'
 
 const Footer = () => {
   return (
@@ -9,13 +9,7 @@ const Footer = () => {
     <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
             <Link href="/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                <Image 
-                src="/logo.png" 
-                className="h-8 w-auto" 
-                alt="Logo" 
-                width={80}
-                height={40}
-                priority={true}/>
+                <Logo />
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-accentDark"></span>
             </Link>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-accentDark">

@@ -8,6 +8,7 @@ import { UserButton, useUser } from '@clerk/nextjs';
 import { GiShoppingCart } from "react-icons/gi";
 import GlobalApi from '@/app/utils/GlobalApi';
 import dynamic from 'next/dynamic';
+import Logo from './Logo';
 
 const DynamicCart = dynamic(() => import('./cart/Cart'), { ssr: false });
 
@@ -26,7 +27,7 @@ const Nav = () => {
 
   const getCartItem = async () => {
     try {
-      const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
+      const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress?.emailAddress);
       setCart(response.data.data);
     } catch (error) {
       console.error("Error fetching cart items:", error);
@@ -51,14 +52,7 @@ const Nav = () => {
     <nav className="bg-[#F7F7F7] dark:bg-dark fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 md:max-w-full sm:max-w-full">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image
-            src="/logo.png"
-            className="h-8 w-auto"
-            alt="Logo"
-            width={80}
-            height={40}
-            priority={true}
-          />
+          <Logo />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-[#F7F7F7]"></span>
         </Link>
         <div className="flex md:order-2 gap-x-5 md:space-x-0 rtl:space-x-reverse">
