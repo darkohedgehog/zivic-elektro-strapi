@@ -30,10 +30,11 @@ const deleteCartItem = (id) => axiosClient.delete('/carts/' + id);
 const updateCartItem = (id, data) => axiosClient.put('/carts/' + id, { data });
 
 //Orders
-const createOrder = (orderData) => {
-  console.log('Order data being sent to Strapi:', orderData); // Log the order data
-  return axiosClient.post('/orders', { data: orderData });
-};
+const createOrder = (data) => {
+    return axiosClient.post('/orders', { data });
+  };
+  
+
 
 //Clear Cart
 const clearCart = async () => {
