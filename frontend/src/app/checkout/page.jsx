@@ -33,11 +33,11 @@ const Checkout = () => {
       const imageUrl = productData?.attributes?.gallery?.data[0]?.attributes?.url ? baseUrl + productData?.attributes?.gallery?.data[0]?.attributes?.url : defaultImageUrl;
       total += price * quantity;
       return {
-        product: productData?.id, // Ensure we are using the product ID
-        productTitle: productData?.attributes?.title || 'Unknown Product', // Add product title
+        product: productData?.id,
+        productTitle: productData?.attributes?.title || 'Unknown Product',
         quantity,
         price,
-        imageUrl // Add image URL
+        imageUrl
       };
     });
     total += 4.00; // Troškovi dostave
@@ -47,6 +47,7 @@ const Checkout = () => {
       orderDetails: details
     }));
   }, [cart]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;

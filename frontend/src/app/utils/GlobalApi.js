@@ -41,7 +41,7 @@ const clearCart = async () => {
     const cartItems = await axiosClient.get('/carts');
     const deleteRequests = cartItems.data.data.map(item => deleteCartItem(item.id));
     await Promise.all(deleteRequests);
-};
+  };
 
 export default {
     getLatestProducts,

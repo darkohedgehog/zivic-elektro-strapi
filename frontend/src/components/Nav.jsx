@@ -1,7 +1,6 @@
 "use client";
-import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { usePathname } from 'next/navigation';
 import { ModeToggle } from './hooks/useThemeSwitch';
 import { UserButton, useUser } from '@clerk/nextjs';
@@ -9,6 +8,8 @@ import { GiShoppingCart } from "react-icons/gi";
 import GlobalApi from '@/app/utils/GlobalApi';
 import dynamic from 'next/dynamic';
 import Logo from './Logo';
+import { CartContext } from '@/app/context/CartContent';
+
 
 const DynamicCart = dynamic(() => import('./cart/Cart'), { ssr: false });
 
@@ -16,18 +17,19 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { user } = useUser();
-  const [cart, setCart] = useState([]);
+  const { cart, setCart } = useContext(CartContext);
   const [openCart, setOpenCart] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    if (user && user.primaryEmailAddress && user.primaryEmailAddress.emailAddress) {
       getCartItem();
     }
   }, [user]);
+  
 
   const getCartItem = async () => {
     try {
-      const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress?.emailAddress);
+      const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
       setCart(response.data.data);
     } catch (error) {
       console.error("Error fetching cart items:", error);
