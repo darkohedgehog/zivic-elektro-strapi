@@ -4,11 +4,12 @@ export interface ProductOrderDetails extends Schema.Component {
   collectionName: 'components_product_order_details';
   info: {
     displayName: 'OrderDetails';
+    description: '';
   };
   attributes: {
-    product: Attribute.Relation<
+    products: Attribute.Relation<
       'product.order-details',
-      'oneToOne',
+      'oneToMany',
       'api::product.product'
     >;
     quantity: Attribute.Integer;

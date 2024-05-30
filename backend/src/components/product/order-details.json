@@ -1,13 +1,14 @@
 {
   "collectionName": "components_product_order_details",
   "info": {
-    "displayName": "OrderDetails"
+    "displayName": "OrderDetails",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "product": {
+    "products": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::product.product"
     },
     "quantity": {

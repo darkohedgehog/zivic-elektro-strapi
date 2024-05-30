@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-
-export const EmailTemplate = ({ firstName, lastName, email, phoneNumber, billingAddress, shippingAddress, orderDetails, totalAmount, paymentMethod }) => (
+export const EmailTemplate = ({ firstName, lastName, email, phoneNumber, billingAddress, shippingAddress, totalAmount, paymentMethod, products }) => (
   <div style={{ fontFamily: 'Arial, sans-serif', color: '#333', padding: '20px' }}>
     <h1 style={{ color: '#4CAF50' }}>Potvrda narudžbe</h1>
     <p>Pozdrav {firstName} {lastName},</p>
@@ -25,7 +24,7 @@ export const EmailTemplate = ({ firstName, lastName, email, phoneNumber, billing
         </tr>
       </thead>
       <tbody>
-        {orderDetails.map((item, index) => (
+        {products.map((item, index) => (
           <tr key={index}>
             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.productTitle}</td>
             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.quantity}</td>

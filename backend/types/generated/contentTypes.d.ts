@@ -885,7 +885,13 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       ['Cash On Delivery', 'Card', 'Bank Transfer']
     >;
     totalAmount: Attribute.Decimal;
-    orderDetails: Attribute.Component<'product.order-details', true>;
+    products: Attribute.Relation<
+      'api::order.order',
+      'oneToMany',
+      'api::product.product'
+    >;
+    quantity: Attribute.Integer;
+    price: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

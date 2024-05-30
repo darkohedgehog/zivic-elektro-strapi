@@ -62,7 +62,7 @@ const Nav = () => {
             <>
               <div className='flex text-md gap-1 cursor-pointer' onClick={() => setOpenCart(!openCart)}>
                 <GiShoppingCart className='text-accent dark:text-accentDark w-6 h-6' />
-                <span>({cart.length})</span>
+                <span>({cart?.length})</span>
               </div>
               <UserButton afterSignOutUrl='/' />
               {openCart && <DynamicCart />}

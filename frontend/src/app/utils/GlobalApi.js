@@ -30,9 +30,7 @@ const deleteCartItem = (id) => axiosClient.delete('/carts/' + id);
 const updateCartItem = (id, data) => axiosClient.put('/carts/' + id, { data });
 
 //Orders
-const createOrder = (data) => {
-    return axiosClient.post('/orders', { data });
-  };
+const createOrder = (data) => axiosClient.post('/orders', { data });
   
 
 

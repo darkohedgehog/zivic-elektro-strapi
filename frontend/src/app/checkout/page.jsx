@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { CartContext } from '../context/CartContent';
 import GlobalApi from '@/app/utils/GlobalApi';
-import { useRouter } from 'next/navigation';  // Import useRouter for navigation
+import { useRouter } from 'next/navigation';
 
 const Checkout = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -15,39 +15,39 @@ const Checkout = () => {
     shippingAddress: '',
     companyName: '',
     taxID: '',
+    paymentMethod: '',
     totalAmount: 0,
-    orderDetails: [],
-    paymentMethod: '' // Add paymentMethod
+    products: [],
+    quantity: 0,
+    price: 0,
   });
 
-  const router = useRouter();  // Initialize useRouter
+  const router = useRouter();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
-  const defaultImageUrl = '/logo.png'; // zameni sa validnom URL vrednošću
+  const defaultImageUrl = '/logo.png';
 
   useEffect(() => {
     let total = 0;
-    const details = cart.map(item => {
+    const productDetails = cart.map(item => {
       const productData = item?.attributes?.products?.data[0];
       const price = parseFloat(productData?.attributes?.price) || 0;
       const quantity = item?.attributes?.quantity || 1;
-      const imageUrl = productData?.attributes?.gallery?.data[0]?.attributes?.url ? baseUrl + productData?.attributes?.gallery?.data[0]?.attributes?.url : defaultImageUrl;
       total += price * quantity;
       return {
         product: productData?.id,
-        productTitle: productData?.attributes?.title || 'Unknown Product',
         quantity,
-        price,
-        imageUrl
+        price
       };
     });
-    total += 4.00; // Troškovi dostave
+
     setOrderData(prevState => ({
       ...prevState,
-      totalAmount: total,
-      orderDetails: details
+      totalAmount: total + 4.00, // Add shipping cost
+      products: productDetails.map(detail => detail.product),
+      quantity: productDetails.reduce((sum, detail) => sum + detail.quantity, 0),
+      price: total
     }));
   }, [cart]);
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,24 +79,22 @@ const Checkout = () => {
 
   const handlePayment = async (paymentMethod) => {
     try {
-      const updatedOrderData = { ...orderData, paymentMethod }; // Include paymentMethod
+      const updatedOrderData = { ...orderData, paymentMethod };
       console.log('Order data before sending:', updatedOrderData);
 
       const response = await GlobalApi.createOrder(updatedOrderData);
       console.log('Order created:', response.data);
-      await GlobalApi.clearCart(); // Clear the cart in the backend
-      setCart([]); // Clear the cart in the frontend
+      await GlobalApi.clearCart();
+      setCart([]);
 
-      // Send confirmation email
       await sendConfirmationEmail(updatedOrderData);
 
-      // Redirect based on payment method
       if (paymentMethod === 'Card') {
-        router.push('/payment-stripe'); // Redirect to Stripe payment page
+        router.push('/payment-stripe');
       } else if (paymentMethod === 'Bank Transfer') {
-        router.push('/payment-banktransfer'); // Redirect to Bank Transfer page
+        router.push('/payment-banktransfer');
       } else {
-        router.push('/order-success'); // Redirect to Success page for Cash On Delivery
+        router.push('/order-success');
       }
     } catch (error) {
       console.error('Error creating order:', error);
