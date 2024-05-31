@@ -21,7 +21,7 @@ const Nav = () => {
   const [openCart, setOpenCart] = useState(false);
 
   useEffect(() => {
-    if (user && user.primaryEmailAddress && user.primaryEmailAddress.emailAddress) {
+    if (user && user?.primaryEmailAddress && user?.primaryEmailAddress?.emailAddress) {
       getCartItem();
     }
   }, [user]);
@@ -29,7 +29,7 @@ const Nav = () => {
 
   const getCartItem = async () => {
     try {
-      const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
+      const response = await GlobalApi.getUserCartItems(user?.primaryEmailAddress?.emailAddress);
       setCart(response.data.data);
     } catch (error) {
       console.error("Error fetching cart items:", error);

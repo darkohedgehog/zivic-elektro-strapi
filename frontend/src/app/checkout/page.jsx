@@ -23,8 +23,8 @@ const Checkout = () => {
   });
 
   const router = useRouter();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
-  const defaultImageUrl = '/logo.png';
+  //const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
+  //const defaultImageUrl = '/logo.png';
 
   useEffect(() => {
     let total = 0;
