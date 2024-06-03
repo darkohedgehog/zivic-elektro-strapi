@@ -4,7 +4,7 @@ import { CartContext } from '../context/CartContent';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useRouter } from 'next/navigation';
 
-const Checkout = () => {
+const CashOnDelivery = () => {
   const { cart, setCart } = useContext(CartContext);
   const [orderData, setOrderData] = useState({
     firstName: '',
@@ -15,7 +15,7 @@ const Checkout = () => {
     shippingAddress: '',
     companyName: '',
     taxID: '',
-    paymentMethod: '',
+    paymentMethod: 'Cash On Delivery',
     totalAmount: 0,
     products: [],
     quantity: 0,
@@ -23,8 +23,6 @@ const Checkout = () => {
   });
 
   const router = useRouter();
-  //const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
-  //const defaultImageUrl = '/logo.png';
 
   useEffect(() => {
     let total = 0;
@@ -32,9 +30,11 @@ const Checkout = () => {
       const productData = item?.attributes?.products?.data[0];
       const price = parseFloat(productData?.attributes?.price) || 0;
       const quantity = item?.attributes?.quantity || 1;
+      const title = productData?.attributes?.title || "Unknown Product";
       total += price * quantity;
       return {
         product: productData?.id,
+        title,
         quantity,
         price
       };
@@ -43,7 +43,7 @@ const Checkout = () => {
     setOrderData(prevState => ({
       ...prevState,
       totalAmount: total + 4.00, // Add shipping cost
-      products: productDetails.map(detail => detail.product),
+      products: productDetails.map(detail => ({ id: detail.product, title: detail.title })),
       quantity: productDetails.reduce((sum, detail) => sum + detail.quantity, 0),
       price: total
     }));
@@ -59,43 +59,37 @@ const Checkout = () => {
 
   const sendConfirmationEmail = async (orderData) => {
     try {
-      const response = await fetch('/api/send', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify({ orderData }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to send email');
       }
-
+  
       console.log('Confirmation email sent successfully');
     } catch (error) {
       console.error('Error sending confirmation email:', error);
     }
   };
+  
 
-  const handlePayment = async (paymentMethod) => {
+  const handlePayment = async () => {
     try {
-      const updatedOrderData = { ...orderData, paymentMethod };
+      const updatedOrderData = { ...orderData, paymentMethod: 'Cash On Delivery' };
       console.log('Order data before sending:', updatedOrderData);
-
+  
       const response = await GlobalApi.createOrder(updatedOrderData);
       console.log('Order created:', response.data);
       await GlobalApi.clearCart();
       setCart([]);
-
+  
       await sendConfirmationEmail(updatedOrderData);
-
-      if (paymentMethod === 'Card') {
-        router.push('/payment-stripe');
-      } else if (paymentMethod === 'Bank Transfer') {
-        router.push('/payment-banktransfer');
-      } else {
-        router.push('/order-success');
-      }
+      router.push('/order-success');
     } catch (error) {
       console.error('Error creating order:', error);
       if (error.response) {
@@ -104,7 +98,7 @@ const Checkout = () => {
       }
     }
   };
-
+  
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Checkout</h1>
@@ -144,14 +138,8 @@ const Checkout = () => {
           </div>
         </div>
         <div className="mt-6">
-          <button type="button" className="bg-green-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-700" onClick={() => handlePayment('Cash On Delivery')}>
+          <button type="button" className="bg-green-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-700" onClick={handlePayment}>
             Cash On Delivery
-          </button>
-          <button type="button" className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700 ml-4" onClick={() => handlePayment('Card')}>
-            Card (Stripe)
-          </button>
-          <button type="button" className="bg-yellow-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-yellow-700 ml-4" onClick={() => handlePayment('Bank Transfer')}>
-            Bank Transfer
           </button>
         </div>
       </form>
@@ -159,4 +147,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CashOnDelivery;

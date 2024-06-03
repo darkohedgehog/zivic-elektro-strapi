@@ -31,7 +31,6 @@ const updateCartItem = (id, data) => axiosClient.put('/carts/' + id, { data });
 
 //Orders
 const createOrder = (data) => axiosClient.post('/orders', { data });
-  
 
 
 //Clear Cart

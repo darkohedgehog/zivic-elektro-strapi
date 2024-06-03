@@ -6,6 +6,9 @@ import { CiTrash } from 'react-icons/ci';
 import Link from 'next/link';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useUser } from '@clerk/nextjs';
+import { GiPayMoney } from "react-icons/gi";
+import { TbTransactionEuro } from "react-icons/tb";
+
 
 const CartPage = () => {
   const { user } = useUser();
@@ -207,7 +210,7 @@ const CartPage = () => {
                     </div>
                   </dl>
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-end gap-x-3">
                     <input
                       type="text"
                       placeholder="Unesi promo kod"
@@ -224,15 +227,26 @@ const CartPage = () => {
                       Primjeni
                     </button>
                   </div>
+                  <div className='flex justify-end mt-10 pt-10 text-md uppercase'>
+                    Odaberite način plaćanja
+                  </div>
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-end mt-10 pt-10 gap-x-3">
                     <Link
-                      href="/checkout"
+                      href="/payment-cash"
                       className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
                       focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
-                      text-sm px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition ml-2 shadow-lg"
-                    >
-                      Plaćanje
+                      text-[12px] px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition ml-2 shadow-lg flex gap-x-2 justify-center items-center"
+                    ><GiPayMoney className='w-6 h-6' />
+                      Plaćanje pouzećem
+                    </Link>
+                    <Link
+                      href="/payment-banktransfer"
+                      className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
+                      focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
+                      text-[12px] px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition ml-2 shadow-lg flex gap-x-2 justify-center items-center"
+                    ><TbTransactionEuro className='w-6 h-6' />
+                      Bankarska transakcija
                     </Link>
                   </div>
                 </div>
