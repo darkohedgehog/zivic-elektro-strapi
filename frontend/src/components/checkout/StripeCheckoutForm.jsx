@@ -1,7 +1,7 @@
 import React from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const CheckoutForm = ({ orderData, handlePayment, setError }) => {
+const StripeCheckoutForm = ({ orderData, handlePayment, setError }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -9,32 +9,36 @@ const CheckoutForm = ({ orderData, handlePayment, setError }) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
       return;
     }
 
-    const cardElement = elements.getElement(CardElement);
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/order-success`,
+        receipt_email: orderData.email,
+      },
+      redirect: 'if_required'
     });
 
     if (error) {
-      console.error(error);
       setError(error.message);
+    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+      handlePayment();
     } else {
-      handlePayment(paymentMethod.id);
+      setError('Payment failed. Please try again.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button type="submit" disabled={!stripe} className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700 mt-4">
-        Pay with Card
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <PaymentElement />
+      <button type="submit" className="w-full bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700">
+        Pay Now
       </button>
     </form>
   );
 };
 
-export default CheckoutForm;
+export default StripeCheckoutForm;
