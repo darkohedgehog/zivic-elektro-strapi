@@ -7,7 +7,11 @@ export async function POST(req, res) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
       currency: 'eur',
-      receipt_email: customer.email, // Ensure we include the receipt email
+      receipt_email: customer.email,
+      metadata: {
+        customerName: `${customer.firstName} ${customer.lastName}`,
+        phone: customer.phoneNumber
+      }
     });
 
     return new Response(JSON.stringify({ clientSecret: paymentIntent.client_secret }), { status: 200 });

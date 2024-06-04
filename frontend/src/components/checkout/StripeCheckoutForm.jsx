@@ -1,17 +1,20 @@
-import React from 'react';
-import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+"use client";
+import React, { useState } from 'react';
+import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const StripeCheckoutForm = ({ orderData, handlePayment, setError }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
       return;
     }
+
+    setLoading(true);
 
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
@@ -24,18 +27,24 @@ const StripeCheckoutForm = ({ orderData, handlePayment, setError }) => {
 
     if (error) {
       setError(error.message);
+      setLoading(false);
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
       handlePayment();
     } else {
-      setError('Payment failed. Please try again.');
+      setError('Unexpected state: ' + paymentIntent.status);
+      setLoading(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <PaymentElement />
-      <button type="submit" className="w-full bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700">
-        Pay Now
+      <button
+        type="submit"
+        disabled={!stripe || loading}
+        className="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700"
+      >
+        {loading ? 'Processing...' : 'Pay with Card'}
       </button>
     </form>
   );

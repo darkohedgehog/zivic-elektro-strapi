@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import dynamic from 'next/dynamic';
+import { useUser } from '@clerk/nextjs';
 
 
 // Load Stripe outside of a component’s render to avoid recreating the Stripe object on every render.
@@ -16,6 +17,7 @@ const StripeCheckoutForm = dynamic(() => import('@/components/checkout/StripeChe
 
 const Checkout = () => {
   const { cart, setCart } = useContext(CartContext);
+  const { user } = useUser();
   const [orderData, setOrderData] = useState({
     firstName: '',
     lastName: '',
@@ -37,6 +39,18 @@ const Checkout = () => {
   const [success, setSuccess] = useState(false);
   const [clientOnly, setClientOnly] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      setOrderData(prevState => ({
+        ...prevState,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.emailAddresses[0].emailAddress,
+        phoneNumber: user.primaryPhoneNumber ? user.primaryPhoneNumber.phoneNumber : ''
+      }));
+    }
+  }, [user]);
 
   useEffect(() => {
     setClientOnly(true);  // Ensure this component is only rendered on the client
@@ -192,6 +206,5 @@ const Checkout = () => {
     </div>
   );
 };
-
 
 export default Checkout;
