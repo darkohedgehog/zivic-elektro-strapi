@@ -17,6 +17,22 @@ const getProductById = (id) => axiosClient.get('/products/'+id+'?populate=*');
 //Get product list by category
 const getProductListByCategory = (category) => axiosClient.get('/products?filters[category][$eq]='+category+"&populate=*");
 
+const getProductListByCategoryName = async (categoryName) => {
+    const url = `/products?filters[category][$eq]=${categoryName}&populate=*`;
+    console.log(`Fetching products from URL: ${url}`); // Logovanje URL-a za debagovanje
+    try {
+        return await axiosClient.get(url);
+    } catch (error) {
+        console.error("API call error:", error.response); // Logovanje odgovora sa greškom
+        throw error;
+    }
+}
+
+
+
+
+
+
 //Add to Cart Collection
 const addToCart = (data) => axiosClient.post('/carts', data);
 
@@ -39,6 +55,7 @@ const clearCart = async () => {
     const deleteRequests = cartItems.data.data.map(item => deleteCartItem(item.id));
     await Promise.all(deleteRequests);
   };
+  
 
 export default {
     getLatestProducts,
@@ -51,4 +68,5 @@ export default {
     updateCartItem,
     createOrder,
     clearCart,
+    getProductListByCategoryName,
 };
