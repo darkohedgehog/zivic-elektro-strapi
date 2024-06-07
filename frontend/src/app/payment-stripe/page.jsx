@@ -8,7 +8,6 @@ import { Elements } from '@stripe/react-stripe-js';
 import dynamic from 'next/dynamic';
 import { useUser } from '@clerk/nextjs';
 
-
 // Load Stripe outside of a component’s render to avoid recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -37,8 +36,23 @@ const Checkout = () => {
   const [clientSecret, setClientSecret] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [clientOnly, setClientOnly] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+
+  const fetchCartItems = async () => {
+    if (user && user.primaryEmailAddress) {
+      try {
+        const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
+        setCart(response.data.data);
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchCartItems();
+  }, [user]);
 
   useEffect(() => {
     if (user) {
@@ -53,20 +67,15 @@ const Checkout = () => {
   }, [user]);
 
   useEffect(() => {
-    setClientOnly(true);  // Ensure this component is only rendered on the client
-  }, []);
-
-  useEffect(() => {
     let total = 0;
     const productDetails = cart.map(item => {
       const productData = item?.attributes?.products?.data[0];
       const price = parseFloat(productData?.attributes?.price) || 0;
       const quantity = item?.attributes?.quantity || 1;
-      const title = productData?.attributes?.title || "Unknown Product";
       total += price * quantity;
       return {
         product: productData?.id,
-        title,
+        title: productData?.attributes?.title || "Unknown Product",
         quantity,
         price
       };
@@ -93,6 +102,7 @@ const Checkout = () => {
             email: orderData.email,
             firstName: orderData.firstName,
             lastName: orderData.lastName,
+            phoneNumber: orderData.phoneNumber
           }
         }),
       })
@@ -105,6 +115,11 @@ const Checkout = () => {
     }
 
   }, [cart, orderData.email, orderData.firstName, orderData.lastName]);
+
+  useEffect(() => {
+    // Ensure this component is only rendered on the client
+    setIsClient(true);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -144,7 +159,7 @@ const Checkout = () => {
       await GlobalApi.clearCart();
       setCart([]);
   
-      await sendConfirmationEmail(updatedOrderData);  // Email se šalje nakon uspešnog kreiranja narudžbe
+      await sendConfirmationEmail(updatedOrderData); // Email se šalje nakon uspešnog kreiranja narudžbe
       setSuccess(true);
       router.push('/order-success');
     } catch (error) {
@@ -195,7 +210,7 @@ const Checkout = () => {
             <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
         </div>
-        {clientSecret && clientOnly && (
+        {clientSecret && isClient && (
           <Elements stripe={stripePromise} options={{ clientSecret }}>
             <StripeCheckoutForm orderData={orderData} handlePayment={handlePayment} setError={setError} />
           </Elements>
