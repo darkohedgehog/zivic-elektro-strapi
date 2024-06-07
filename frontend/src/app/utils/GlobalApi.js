@@ -28,6 +28,25 @@ const getProductListByCategoryName = async (categoryName) => {
     }
 }
 
+// Get subCategory
+
+const getSubCategoriesByCategory = (categoryName) => {
+    const url = `/subcategories?filters[cate][$eq]=${categoryName}&populate=*`;
+    console.log(`Fetching subcategories from URL: ${url}`); // Logovanje URL-a za debagovanje
+    return axiosClient.get(url).catch(error => {
+        console.error("API call error:", error.response); // Logovanje odgovora sa greškom
+        throw error;
+    });
+}
+
+const getProductListByCategoryAndSubCategory = (categoryName, subCategoryName) => {
+    const url = `/products?filters[category][$eq]=${categoryName}&filters[subCate][$eq]=${subCategoryName}&populate=*`;
+    console.log(`Fetching products from URL: ${url}`); // Logovanje URL-a za debagovanje
+    return axiosClient.get(url).catch(error => {
+        console.error("API call error:", error.response); // Logovanje odgovora sa greškom
+        throw error;
+    });
+}
 
 
 
@@ -69,4 +88,6 @@ export default {
     createOrder,
     clearCart,
     getProductListByCategoryName,
+    getSubCategoriesByCategory,
+    getProductListByCategoryAndSubCategory,
 };
