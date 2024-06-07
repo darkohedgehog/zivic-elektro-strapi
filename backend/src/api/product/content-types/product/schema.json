@@ -88,6 +88,17 @@
         "Grlo",
         "Zvono"
       ]
+    },
+    "subCate": {
+      "type": "enumeration",
+      "enum": [
+        "Bijela boja",
+        "Crna boja",
+        "Nosači",
+        "Okviri",
+        "Modularne kutije",
+        "Tinjalice"
+      ]
     }
   }
 }

@@ -948,6 +948,16 @@ export interface ApiProductProduct extends Schema.CollectionType {
         'Zvono'
       ]
     >;
+    subCate: Attribute.Enumeration<
+      [
+        'Bijela boja',
+        'Crna boja',
+        'Nosa\u010Di',
+        'Okviri',
+        'Modularne kutije',
+        'Tinjalice'
+      ]
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -959,6 +969,41 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubcategorySubcategory extends Schema.CollectionType {
+  collectionName: 'subcategories';
+  info: {
+    singularName: 'subcategory';
+    pluralName: 'subcategories';
+    displayName: 'subCategory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    subCate: Attribute.String;
+    hoverThumbnail: Attribute.Media;
+    hasCate: Attribute.Boolean;
+    cate: Attribute.String;
+    gallery: Attribute.Media;
+    thumbnail: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::subcategory.subcategory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::subcategory.subcategory',
       'oneToOne',
       'admin::user'
     > &
@@ -988,6 +1033,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
+      'api::subcategory.subcategory': ApiSubcategorySubcategory;
     }
   }
 }
