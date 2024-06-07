@@ -24,6 +24,19 @@ const CashOnDelivery = () => {
 
   const router = useRouter();
 
+  const fetchCartItems = async () => {
+    try {
+      const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
+      setCart(response.data.data);
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
+
   useEffect(() => {
     let total = 0;
     const productDetails = cart.map(item => {
@@ -42,7 +55,7 @@ const CashOnDelivery = () => {
 
     setOrderData(prevState => ({
       ...prevState,
-      totalAmount: total + 4.00, // Add shipping cost
+      totalAmount: total + 4.00,
       products: productDetails.map(detail => ({ id: detail.product, title: detail.title })),
       quantity: productDetails.reduce((sum, detail) => sum + detail.quantity, 0),
       price: total
@@ -76,7 +89,6 @@ const CashOnDelivery = () => {
       console.error('Error sending confirmation email:', error);
     }
   };
-  
 
   const handlePayment = async () => {
     try {
@@ -98,6 +110,7 @@ const CashOnDelivery = () => {
       }
     }
   };
+
   
   return (
     <div className="container mx-auto p-6">

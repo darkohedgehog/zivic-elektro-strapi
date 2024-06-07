@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Image from 'next/image';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { CiTrash } from 'react-icons/ci';
@@ -8,17 +8,18 @@ import GlobalApi from '@/app/utils/GlobalApi';
 import { useUser } from '@clerk/nextjs';
 import { GiPayMoney } from "react-icons/gi";
 import { TbTransactionEuro } from "react-icons/tb";
+import { CartContext } from '../context/CartContent';
 
 
 const CartPage = () => {
+  const { cart, setCart } = useContext(CartContext);
   const { user } = useUser();
-  const [cart, setCart] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [subtotal, setSubtotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [vat, setVat] = useState(0);
   const [total, setTotal] = useState(0);
-  const [shipping, setShipping] = useState(4.00); // Troškovi dostave
+  const [shipping, setShipping] = useState(4.00);
   const [discountCode, setDiscountCode] = useState('');
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337/';
 
@@ -51,22 +52,22 @@ const CartPage = () => {
       const productData = item?.attributes?.products?.data[0];
       const quantity = quantities[item.id] || 1;
       const price = parseFloat(productData?.attributes?.price) || 0;
-      newSubtotal += (price / 1.25) * quantity; // Cena bez poreza
+      newSubtotal += (price / 1.25) * quantity;
     });
     setSubtotal(newSubtotal);
-    setVat(newSubtotal * 0.25); // Porez je 25%
-    setTotal(newSubtotal + newSubtotal * 0.25 - discount + shipping); // Ukupna suma
+    setVat(newSubtotal * 0.25);
+    setTotal(newSubtotal + newSubtotal * 0.25 - discount + shipping);
   }, [cart, quantities, discount, shipping]);
 
   const handleQuantityChange = async (itemId, newQuantity) => {
-    if (newQuantity < 1) return; // Ne dozvoli količinu manju od 1
+    if (newQuantity < 1) return;
     setQuantities(prev => ({
       ...prev,
       [itemId]: newQuantity
     }));
     try {
       await GlobalApi.updateCartItem(itemId, { quantity: newQuantity });
-      fetchCartItems(); // Osveži korpu nakon ažuriranja količine
+      await fetchCartItems(); // Osveži korpu nakon ažuriranja količine
     } catch (error) {
       console.error('Error updating cart item:', error);
     }
@@ -75,7 +76,7 @@ const CartPage = () => {
   const handleRemoveItem = async (itemId) => {
     try {
       await GlobalApi.deleteCartItem(itemId);
-      fetchCartItems(); // Osveži korpu nakon brisanja stavke
+      await fetchCartItems(); // Osveži korpu nakon brisanja stavke
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }
@@ -87,11 +88,12 @@ const CartPage = () => {
 
   const applyDiscount = () => {
     if (discountCode === 'akcija10') {
-      setDiscount(subtotal * 0.1); // 10% popusta
+      setDiscount(subtotal * 0.1);
     } else {
-      setDiscount(0); // Nema popusta
+      setDiscount(0);
     }
   };
+
 
   return (
     <>
