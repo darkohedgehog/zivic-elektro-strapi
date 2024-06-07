@@ -1,8 +1,11 @@
+import CategoryShopSection from '@/components/shop/CategoryShopSection'
 import React from 'react'
 
 const Shop = () => {
   return (
-    <div>Shop</div>
+    <div className='pt-28'>
+     <CategoryShopSection />
+    </div>
   )
 }
 
