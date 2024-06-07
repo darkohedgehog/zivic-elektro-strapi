@@ -78,7 +78,7 @@ const Cart = () => {
           Vidi košaricu ({cart?.length})
         </Link>
         <Link
-          href="#"
+          href="/shop"
           className="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
         >
           Nastavi kupovati

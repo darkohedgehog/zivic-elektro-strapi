@@ -113,8 +113,8 @@ const Nav = () => {
               </Link>
             </li>
             <li>
-              <Link href="/services"
-                className={`block py-2 px-3 ${isActive('/services') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/services') ? 'page' : undefined}>Trgovina
+              <Link href="/shop"
+                className={`block py-2 px-3 ${isActive('/shop') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/services') ? 'page' : undefined}>Trgovina
               </Link>
             </li>
             <li>
