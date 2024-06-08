@@ -96,8 +96,14 @@ const BankTransfer = () => {
     }
   };
 
+  const generateUniqueReference = () => {
+    return Math.random().toString(36).substr(2, 9).toUpperCase(); // Generisanje nasumičnog alfanumeričkog stringa
+  };
+  
   const generateBarcodeData = (orderData) => {
     const LF = '\n';
+    const uniqueReference = generateUniqueReference();
+  
     const fields = [
       { name: 'header', length: 8, value: 'HUB3A' }, // Zaglavlje
       { name: 'currency', length: 3, value: 'EUR' }, // Valuta
@@ -105,18 +111,19 @@ const BankTransfer = () => {
       { name: 'payer', length: 30, value: `${orderData.firstName} ${orderData.lastName}`.slice(0, 30) }, // Platitelj
       { name: 'payerAddress1', length: 27, value: orderData.billingAddress.split(',')[0].slice(0, 27) }, // Adresa platitelja
       { name: 'payerAddress2', length: 27, value: orderData.billingAddress.split(',').slice(1).join(',').slice(0, 27) }, // Adresa platitelja
-      { name: 'payee', length: 25, value: 'Example Company'.slice(0, 25) }, // Primatelj
-      { name: 'payeeAddress1', length: 25, value: 'Example Street 1'.slice(0, 25) }, // Adresa primatelja
-      { name: 'payeeAddress2', length: 27, value: '10000 Zagreb'.slice(0, 27) }, // Adresa primatelja
-      { name: 'payeeIBAN', length: 21, value: 'HR1234567890123456789'.slice(0, 21) }, // Broj računa primatelja
+      { name: 'payee', length: 25, value: 'Živić-Elektro j.d.o.o.'.slice(0, 25) }, // Primatelj
+      { name: 'payeeAddress1', length: 25, value: '204.vuk. brigade 39'.slice(0, 25) }, // Adresa primatelja
+      { name: 'payeeAddress2', length: 27, value: '32000 Vukovar'.slice(0, 27) }, // Adresa primatelja
+      { name: 'payeeIBAN', length: 21, value: 'HR0925000091101386980'.slice(0, 21) }, // Broj računa primatelja
       { name: 'model', length: 4, value: 'HR00' }, // Model kontrole poziva
-      { name: 'reference', length: 22, value: '1234567890123456789012'.slice(0, 22) }, // Poziv na broj primatelja
+      { name: 'reference', length: 22, value: uniqueReference }, // Poziv na broj primatelja
       { name: 'purposeCode', length: 4, value: 'OTHR' }, // Šifra namjene
-      { name: 'paymentDescription', length: 35, value: 'Payment for invoice #123'.slice(0, 35) }, // Opis plaćanja
+      { name: 'paymentDescription', length: 35, value: `Plaćanje po ${uniqueReference}`.slice(0, 35) }, // Opis plaćanja
     ];
-
+  
     return fields.map(field => field.value).join(LF) + LF;
   };
+  
 
   const generateBarcode = async (data) => {
     console.log('Generating barcode with data:', data);
@@ -146,18 +153,34 @@ const BankTransfer = () => {
     try {
       console.log('Generating PDF...');
       const doc = new jsPDF();
+
+      // Fetch the font as an array buffer
+    const fontUrl = '/fonts/CourierPrime-Regular.ttf';
+    const fontBytes = await fetch(fontUrl).then(res => res.arrayBuffer());
+
+    // Convert the array buffer to a binary string
+    const binaryString = String.fromCharCode.apply(null, new Uint8Array(fontBytes));
+
+    // Convert the binary string to a base64 string
+    const base64String = btoa(binaryString);
+
+    // Add the font to the jsPDF instance
+    doc.addFileToVFS('CourierPrime-Regular.ttf', base64String);
+    doc.addFont('CourierPrime-Regular.ttf', 'CourierPrime', 'normal');
+    doc.setFont('CourierPrime', 'normal');
+
       doc.setFontSize(25);
       doc.text('Uplatnica', 20, 20);
       doc.setFontSize(12);
-      doc.text(`First Name: ${orderData.firstName}`, 20, 40);
-      doc.text(`Last Name: ${orderData.lastName}`, 20, 50);
+      doc.text(`Vaše ime: ${orderData.firstName}`, 20, 40);
+      doc.text(`Vaše prezime: ${orderData.lastName}`, 20, 50);
       doc.text(`Email: ${orderData.email}`, 20, 60);
-      doc.text(`Phone Number: ${orderData.phoneNumber}`, 20, 70);
-      doc.text(`Billing Address: ${orderData.billingAddress}`, 20, 80);
-      doc.text(`Shipping Address: ${orderData.shippingAddress}`, 20, 90);
-      doc.text(`Company Name: ${orderData.companyName}`, 20, 100);
-      doc.text(`Tax ID: ${orderData.taxID}`, 20, 110);
-      doc.text(`Total Amount: ${orderData.totalAmount} EUR`, 20, 120);
+      doc.text(`Broj mobitela: ${orderData.phoneNumber}`, 20, 70);
+      doc.text(`Adresa za naplatu: ${orderData.billingAddress}`, 20, 80);
+      doc.text(`Adresa za dostavu: ${orderData.shippingAddress}`, 20, 90);
+      doc.text(`Naziv tvrtke: ${orderData.companyName}`, 20, 100);
+      doc.text(`OIB tvrtke: ${orderData.taxID}`, 20, 110);
+      doc.text(`Ukupan iznos: ${orderData.totalAmount} EUR`, 20, 120);
 
       const barcodeData = generateBarcodeData(orderData);
       console.log('Barcode Data:', barcodeData);
@@ -195,16 +218,16 @@ const BankTransfer = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+    <div className="container mx-auto p-24">
+      <h1 className="text-2xl font-bold mb-6">Plaćanje</h1>
       <form>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">First Name</label>
+            <label className="block text-sm font-medium text-gray-700">Vaše ime</label>
             <input type="text" name="firstName" value={orderData.firstName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Last Name</label>
+            <label className="block text-sm font-medium text-gray-700">Vaše prezime</label>
             <input type="text" name="lastName" value={orderData.lastName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
           <div>
@@ -212,23 +235,23 @@ const BankTransfer = () => {
             <input type="email" name="email" value={orderData.email} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+            <label className="block text-sm font-medium text-gray-700">Broj mobitela</label>
             <input type="text" name="phoneNumber" value={orderData.phoneNumber} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Billing Address</label>
+            <label className="block text-sm font-medium text-gray-700">Adresa za naplatu</label>
             <input type="text" name="billingAddress" value={orderData.billingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Shipping Address</label>
+            <label className="block text-sm font-medium text-gray-700">Adresa za dostavu</label>
             <input type="text" name="shippingAddress" value={orderData.shippingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Company Name (Optional)</label>
+            <label className="block text-sm font-medium text-gray-700">Ime tvrtke (Optional)</label>
             <input type="text" name="companyName" value={orderData.companyName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Tax ID (Optional)</label>
+            <label className="block text-sm font-medium text-gray-700">OIB tvrtke (Optional)</label>
             <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
           </div>
         </div>
@@ -237,19 +260,19 @@ const BankTransfer = () => {
             Bank Transfer
           </button>
           <button type="button" className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700 ml-4" onClick={generatePDF}>
-            Generate Uplatnica PDF
+            Generišite PDF uplatnicu
           </button>
         </div>
       </form>
       <div className="mt-6">
-        <h2 className="text-xl font-bold">Bank Transfer Details</h2>
-        <p>Please transfer the total amount to the following account:</p>
+        <h2 className="text-xl font-bold">Podaci za uplatu:</h2>
+        <p>Molimo da uplatite iznos sa Vaše narudžbe na:</p>
         <ul className="list-disc pl-6">
-          <li>Account Number: 1234567890123456</li>
-          <li>Bank Name: Example Bank</li>
-          <li>Account Holder: Example Company</li>
-          <li>SWIFT Code: EXAMPLED</li>
-          <li>IBAN: EX12345678901234567890</li>
+          <li>Živić-Elektro j.d.o.o.</li>
+          <li>Ime Banke: Addiko Bank d.d.</li>
+          
+          
+          <li>IBAN: HR0925000091101386980</li>
         </ul>
         <p className="mt-4">Please use your Order ID as the payment reference.</p>
       </div>
