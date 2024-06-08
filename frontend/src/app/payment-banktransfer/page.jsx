@@ -4,6 +4,8 @@ import { CartContext } from '../context/CartContent';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
+import jsPDF from 'jspdf';
+import bwipjs from 'bwip-js';
 
 const BankTransfer = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -94,6 +96,82 @@ const BankTransfer = () => {
     }
   };
 
+  const generateBarcodeData = (orderData) => {
+    const LF = '\n';
+    const fields = [
+      { name: 'header', length: 8, value: 'HUB3A' }, // Zaglavlje
+      { name: 'currency', length: 3, value: 'EUR' }, // Valuta
+      { name: 'amount', length: 15, value: orderData.totalAmount.toFixed(2).replace('.', '').padStart(15, '0') }, // Iznos
+      { name: 'payer', length: 30, value: `${orderData.firstName} ${orderData.lastName}`.slice(0, 30) }, // Platitelj
+      { name: 'payerAddress1', length: 27, value: orderData.billingAddress.split(',')[0].slice(0, 27) }, // Adresa platitelja
+      { name: 'payerAddress2', length: 27, value: orderData.billingAddress.split(',').slice(1).join(',').slice(0, 27) }, // Adresa platitelja
+      { name: 'payee', length: 25, value: 'Example Company'.slice(0, 25) }, // Primatelj
+      { name: 'payeeAddress1', length: 25, value: 'Example Street 1'.slice(0, 25) }, // Adresa primatelja
+      { name: 'payeeAddress2', length: 27, value: '10000 Zagreb'.slice(0, 27) }, // Adresa primatelja
+      { name: 'payeeIBAN', length: 21, value: 'HR1234567890123456789'.slice(0, 21) }, // Broj računa primatelja
+      { name: 'model', length: 4, value: 'HR00' }, // Model kontrole poziva
+      { name: 'reference', length: 22, value: '1234567890123456789012'.slice(0, 22) }, // Poziv na broj primatelja
+      { name: 'purposeCode', length: 4, value: 'OTHR' }, // Šifra namjene
+      { name: 'paymentDescription', length: 35, value: 'Payment for invoice #123'.slice(0, 35) }, // Opis plaćanja
+    ];
+
+    return fields.map(field => field.value).join(LF) + LF;
+  };
+
+  const generateBarcode = async (data) => {
+    console.log('Generating barcode with data:', data);
+    const canvas = document.createElement('canvas');
+    try {
+      await bwipjs.toCanvas(canvas, {
+        bcid: 'pdf417',
+        text: data,
+        scale: 3,
+        height: 26 / 0.254, // Convert height to modules
+        width: 58 / 0.254, // Convert width to modules
+        includetext: true,
+        textxalign: 'center',
+        columns: 9,
+        eclevel: 4,
+        compaction: 'binary',
+        includecheck: false,
+      });
+      return canvas.toDataURL('image/png');
+    } catch (error) {
+      console.error('Error generating barcode:', error);
+      throw error;
+    }
+  };
+
+  const generatePDF = async () => {
+    try {
+      console.log('Generating PDF...');
+      const doc = new jsPDF();
+      doc.setFontSize(25);
+      doc.text('Uplatnica', 20, 20);
+      doc.setFontSize(12);
+      doc.text(`First Name: ${orderData.firstName}`, 20, 40);
+      doc.text(`Last Name: ${orderData.lastName}`, 20, 50);
+      doc.text(`Email: ${orderData.email}`, 20, 60);
+      doc.text(`Phone Number: ${orderData.phoneNumber}`, 20, 70);
+      doc.text(`Billing Address: ${orderData.billingAddress}`, 20, 80);
+      doc.text(`Shipping Address: ${orderData.shippingAddress}`, 20, 90);
+      doc.text(`Company Name: ${orderData.companyName}`, 20, 100);
+      doc.text(`Tax ID: ${orderData.taxID}`, 20, 110);
+      doc.text(`Total Amount: ${orderData.totalAmount} EUR`, 20, 120);
+
+      const barcodeData = generateBarcodeData(orderData);
+      console.log('Barcode Data:', barcodeData);
+      const barcodeImgData = await generateBarcode(barcodeData);
+      
+      console.log('Barcode Image Data:', barcodeImgData);
+      doc.addImage(barcodeImgData, 'PNG', 20, 130, 58, 26); // Set the size of the image
+      doc.save('uplatnica.pdf');
+      console.log('PDF generated and saved.');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
+  };
+
   const handlePayment = async () => {
     try {
       const updatedOrderData = { ...orderData, paymentMethod: 'Bank Transfer' };
@@ -157,6 +235,9 @@ const BankTransfer = () => {
         <div className="mt-6">
           <button type="button" className="bg-yellow-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-yellow-700" onClick={handlePayment}>
             Bank Transfer
+          </button>
+          <button type="button" className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700 ml-4" onClick={generatePDF}>
+            Generate Uplatnica PDF
           </button>
         </div>
       </form>
