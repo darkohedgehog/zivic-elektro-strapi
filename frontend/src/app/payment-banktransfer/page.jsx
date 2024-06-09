@@ -97,7 +97,7 @@ const BankTransfer = () => {
   };
 
   const generateUniqueReference = () => {
-    return Math.random().toString(36).substr(2, 9).toUpperCase(); // Generisanje nasumičnog alfanumeričkog stringa
+    return Math.random().toString(36).substring(2,9).toUpperCase(); // Generisanje nasumičnog alfanumeričkog stringa
   };
   
   const generateBarcodeData = (orderData) => {
@@ -169,25 +169,67 @@ const BankTransfer = () => {
     doc.addFont('CourierPrime-Regular.ttf', 'CourierPrime', 'normal');
     doc.setFont('CourierPrime', 'normal');
 
-      doc.setFontSize(25);
-      doc.text('Uplatnica', 20, 20);
-      doc.setFontSize(12);
-      doc.text(`Vaše ime: ${orderData.firstName}`, 20, 40);
-      doc.text(`Vaše prezime: ${orderData.lastName}`, 20, 50);
-      doc.text(`Email: ${orderData.email}`, 20, 60);
-      doc.text(`Broj mobitela: ${orderData.phoneNumber}`, 20, 70);
-      doc.text(`Adresa za naplatu: ${orderData.billingAddress}`, 20, 80);
-      doc.text(`Adresa za dostavu: ${orderData.shippingAddress}`, 20, 90);
-      doc.text(`Naziv tvrtke: ${orderData.companyName}`, 20, 100);
-      doc.text(`OIB tvrtke: ${orderData.taxID}`, 20, 110);
-      doc.text(`Ukupan iznos: ${orderData.totalAmount} EUR`, 20, 120);
+       // Set the style for the document
+    doc.setDrawColor(255, 165, 0); // Orange color for the borders and text
+    doc.setLineWidth(0.5);
 
+    // Draw the main structure
+    // Top section
+    doc.rect(10, 10, 190, 20); // Main outer border
+    doc.text('NALOG ZA PLAĆANJE', 60, 20);
+    
+    // Add labels
+    doc.setFontSize(10);
+    doc.text('PLATITELJ (naziv/ime i adresa):', 12, 35);
+    doc.text('IBAN i broj računa platitelja:', 12, 45);
+    doc.text('Model:', 12, 55);
+    doc.text('Poziv na broj platitelja:', 50, 55);
+
+    doc.text('PRIMATELJ (naziv/ime i adresa):', 12, 75);
+    doc.text('IBAN i broj računa primatelja:', 12, 85);
+    doc.text('Model:', 12, 95);
+    doc.text('Poziv na broj primatelja:', 50, 95);
+    doc.text('Šifra namjene:', 12, 105);
+    doc.text('Opis plaćanja:', 50, 105);
+    doc.text('Datum izvršenja:', 150, 105);
+
+    // Add user data
+    doc.setFontSize(12);
+    doc.text(`${orderData.firstName} ${orderData.lastName}`, 12, 40);
+    doc.text(orderData.billingAddress, 12, 50);
+    doc.text('HR0925000091101386980', 12, 90);
+    doc.text('HR00', 12, 100);
+    doc.text('Poziv na broj primatelja', 50, 100); // You can replace this with actual call number
+    doc.text('OTHR', 12, 110);
+    doc.text('Uplata za naručenu robu', 50, 110); // You can replace this with actual payment description
+
+
+     //Create a 2D Barcode for payments 
       const barcodeData = generateBarcodeData(orderData);
       console.log('Barcode Data:', barcodeData);
       const barcodeImgData = await generateBarcode(barcodeData);
       
       console.log('Barcode Image Data:', barcodeImgData);
       doc.addImage(barcodeImgData, 'PNG', 20, 130, 58, 26); // Set the size of the image
+      // Additional styling to mimic a real payment slip
+      doc.setFontSize(10);
+      doc.text('Primatelj:', 20, 180);
+      doc.setFontSize(12);
+      doc.text('Živić-Elektro j.d.o.o.', 20, 185);
+      doc.text('204.vuk. brigade 39', 20, 190);
+      doc.text('32000 Vukovar', 20, 195);
+      doc.text('HR0925000091101386980', 20, 200);
+
+      doc.setFontSize(10);
+      doc.text('Platitelj:', 20, 210);
+      doc.setFontSize(12);
+      doc.text(`${orderData.firstName} ${orderData.lastName}`, 20, 215);
+      doc.text(orderData.billingAddress, 20, 220);
+
+      doc.setFontSize(10);
+      doc.text('Iznos:', 20, 230);
+      doc.setFontSize(12);
+      doc.text(`${orderData.totalAmount.toFixed(2)} EUR`, 20, 235);
       doc.save('uplatnica.pdf');
       console.log('PDF generated and saved.');
     } catch (error) {
