@@ -260,29 +260,35 @@ const BankTransfer = () => {
   };
 
   return (
-    <div className="container mx-auto p-24">
-      <h1 className="text-2xl font-bold mb-6">Plaćanje</h1>
+    <div className="container mx-auto p-28">
+      <h1 
+      className="text-2xl font-bold mb-6 flex justify-center items-center text-accent dark:text-accentDark uppercase">
+        Plaćanje
+        </h1>
+      <h2 className='text-xl font-semibold mb-6 flex justify-center items-center text-accent dark:text-accentDark uppercase'
+      >Molimo popunite Vaše podatke
+      </h2>
       <form>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Vaše ime</label>
-            <input type="text" name="firstName" value={orderData.firstName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="text" name="firstName" value={orderData.firstName} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Vaše prezime</label>
-            <input type="text" name="lastName" value={orderData.lastName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="text" name="lastName" value={orderData.lastName} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input type="email" name="email" value={orderData.email} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="email" name="email" value={orderData.email} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Broj mobitela</label>
-            <input type="text" name="phoneNumber" value={orderData.phoneNumber} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="text" name="phoneNumber" value={orderData.phoneNumber} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Adresa za naplatu</label>
-            <input type="text" name="billingAddress" value={orderData.billingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="text" name="billingAddress" value={orderData.billingAddress} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Adresa za dostavu</label>
@@ -290,20 +296,12 @@ const BankTransfer = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Ime tvrtke (Optional)</label>
-            <input type="text" name="companyName" value={orderData.companyName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="text" name="companyName" value={orderData.companyName} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">OIB tvrtke (Optional)</label>
-            <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
-        </div>
-        <div className="mt-6">
-          <button type="button" className="bg-yellow-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-yellow-700" onClick={handlePayment}>
-            Bank Transfer
-          </button>
-          <button type="button" className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700 ml-4" onClick={generatePDF}>
-            Generišite PDF uplatnicu
-          </button>
         </div>
       </form>
       <div className="mt-6">
@@ -311,11 +309,24 @@ const BankTransfer = () => {
         <p>Molimo da uplatite iznos sa Vaše narudžbe na:</p>
         <ul className="list-disc pl-6">
           <li>Živić-Elektro j.d.o.o.</li>
-          <li>Ime Banke: Addiko Bank d.d.</li>
-          
-          
+          <li>204. vukovarske brigade 39, Vukovar</li>
+          <li>Banka: Addiko Bank d.d.</li>
           <li>IBAN: HR0925000091101386980</li>
+          <li>Ukupan iznos za uplatu: <span>{orderData.totalAmount}€</span></li>
         </ul>
+        <div className="mt-6">
+          <div className='mb-6'>
+            Ili jednostavno generišite PDF uplatnicu i skenirajte kod vašom m-banking aplikacijom
+          </div>
+          <button type="button" className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700" onClick={generatePDF}>
+            Uplatnica
+          </button>
+        </div>
+        <div className='mt-6'>
+        <button type="button" className="bg-yellow-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-yellow-700" onClick={handlePayment}>
+            Potvrdite
+          </button>
+        </div>
         <p className="mt-4">Please use your Order ID as the payment reference.</p>
       </div>
     </div>
