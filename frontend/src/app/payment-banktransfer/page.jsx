@@ -268,8 +268,8 @@ const BankTransfer = () => {
       <h2 className='text-xl font-semibold mb-6 flex justify-center items-center text-accent dark:text-accentDark uppercase'
       >Molimo popunite Vaše podatke
       </h2>
-      <form>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form className='mt-5 block w-full h-full border-y-2 border-accent dark:border-accentDark rounded-lg shadow-2xl dark:shadow-gray'>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-3 my-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Vaše ime</label>
             <input type="text" name="firstName" value={orderData.firstName} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
@@ -292,7 +292,7 @@ const BankTransfer = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Adresa za dostavu</label>
-            <input type="text" name="shippingAddress" value={orderData.shippingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
+            <input type="text" name="shippingAddress" value={orderData.shippingAddress} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Ime tvrtke (Optional)</label>
@@ -300,7 +300,8 @@ const BankTransfer = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">OIB tvrtke (Optional)</label>
-            <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
+            <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} 
+            className="mt-1 block w-full border border-accent dark:border-accentDark rounded-lg shadow-md z-20" />
           </div>
         </div>
       </form>
