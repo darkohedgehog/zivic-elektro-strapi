@@ -7,6 +7,8 @@ import { useUser } from '@clerk/nextjs';
 import jsPDF from 'jspdf';
 import bwipjs from 'bwip-js';
 import CustomerForm from '../../components/checkout/CostumerForm';
+import CartPreview from '@/components/cart/CartPreview';
+
 
 const BankTransfer = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -272,16 +274,26 @@ const BankTransfer = () => {
       <form>
       <CustomerForm orderData={orderData} handleChange={handleChange} />
       </form>
+      <div className='flex flex-col my-20 h-[300px] w-full sm:w-[300px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl dark:shadow-gray z-20 mx-auto'>
+         <div className='mx-3 mt-4 overflow-auto'>
+        <h3 className='mx-auto my-6 font-semibold text-accent dark:text-accentDark'>
+          Podsjetite se šta ste kupili
+        </h3>
+       <CartPreview />
+        </div>
+       </div>
       <div className="mt-6">
-        <h2 className="text-xl font-bold">Podaci za uplatu:</h2>
-        <p>Molimo da uplatite iznos sa Vaše narudžbe na:</p>
-        <ul className="list-disc pl-6">
-          <li>Živić-Elektro j.d.o.o.</li>
-          <li>204. vukovarske brigade 39, Vukovar</li>
-          <li>Banka: Addiko Bank d.d.</li>
-          <li>IBAN: HR0925000091101386980</li>
-          <li>Ukupan iznos za uplatu: <span>{orderData.totalAmount}€</span></li>
+        <div className='flex flex-col my-20 h-full w-full sm:w-[300px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl dark:shadow-gray z-20 mx-auto text-accent dark:text-accentDark'>
+        <h2 className="text-xl font-semibold mx-auto my-3">Podaci za uplatu:</h2>
+        <p className='mx-3 text-sm mb-3'>Molimo da uplatite iznos sa Vaše narudžbe na:</p>
+        <ul className="list-disc mx-5">
+          <li className='mx-auto my-2'>Živić-Elektro j.d.o.o.</li>
+          <li className='mx-auto my-2'>204. vukovarske brigade 39, Vukovar</li>
+          <li className='mx-auto my-2'>Banka: Addiko Bank d.d.</li>
+          <li className='mx-auto my-2 text-wrap'>IBAN: HR0925000 091101386980</li>
+          <li>Ukupan iznos za uplatu: <span>{orderData.totalAmount.toFixed(2)}€</span></li>
         </ul>
+        </div>
         <div className="mt-6">
           <div className='mb-6'>
             Ili jednostavno generišite PDF uplatnicu i skenirajte kod vašom m-banking aplikacijom
