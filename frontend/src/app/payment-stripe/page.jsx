@@ -7,6 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import dynamic from 'next/dynamic';
 import { useUser } from '@clerk/nextjs';
+import CustomerForm from '../../components/checkout/CostumerForm';
 
 // Load Stripe outside of a component’s render to avoid recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
@@ -176,40 +177,9 @@ const Checkout = () => {
     <div className="container mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Checkout</h1>
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-            <input type="text" name="firstName" value={orderData.firstName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-            <input type="text" name="lastName" value={orderData.lastName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" name="email" value={orderData.email} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-            <input type="text" name="phoneNumber" value={orderData.phoneNumber} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Billing Address</label>
-            <input type="text" name="billingAddress" value={orderData.billingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Shipping Address</label>
-            <input type="text" name="shippingAddress" value={orderData.shippingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Company Name (Optional)</label>
-            <input type="text" name="companyName" value={orderData.companyName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Tax ID (Optional)</label>
-            <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-        </div>
+        <form>
+       <CustomerForm orderData={orderData} handleChange={handleChange} />
+        </form>
         {clientSecret && isClient && (
           <Elements stripe={stripePromise} options={{ clientSecret }}>
             <StripeCheckoutForm orderData={orderData} handlePayment={handlePayment} setError={setError} />

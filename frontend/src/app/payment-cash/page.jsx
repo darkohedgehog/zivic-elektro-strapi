@@ -3,9 +3,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import { CartContext } from '../context/CartContent';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
+import CostumerForm from '@/components/checkout/CostumerForm';
 
 const CashOnDelivery = () => {
   const { cart, setCart } = useContext(CartContext);
+  const { user } = useUser();
   const [orderData, setOrderData] = useState({
     firstName: '',
     lastName: '',
@@ -25,17 +28,21 @@ const CashOnDelivery = () => {
   const router = useRouter();
 
   const fetchCartItems = async () => {
-    try {
-      const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
-      setCart(response.data.data);
-    } catch (error) {
-      console.error('Error fetching cart items:', error);
+    if (user && user.primaryEmailAddress) {
+      try {
+        const response = await GlobalApi.getUserCartItems(user?.primaryEmailAddress?.emailAddress);
+        setCart(response.data.data);
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
     }
   };
 
   useEffect(() => {
     fetchCartItems();
-  }, []);
+  }, [user]);
+
+  
 
   useEffect(() => {
     let total = 0;
@@ -113,49 +120,16 @@ const CashOnDelivery = () => {
 
   
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-28">
       <h1 className="text-2xl font-bold mb-6">Checkout</h1>
       <form>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">First Name</label>
-            <input type="text" name="firstName" value={orderData.firstName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Last Name</label>
-            <input type="text" name="lastName" value={orderData.lastName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input type="email" name="email" value={orderData.email} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Phone Number</label>
-            <input type="text" name="phoneNumber" value={orderData.phoneNumber} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Billing Address</label>
-            <input type="text" name="billingAddress" value={orderData.billingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Shipping Address</label>
-            <input type="text" name="shippingAddress" value={orderData.shippingAddress} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Company Name (Optional)</label>
-            <input type="text" name="companyName" value={orderData.companyName} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Tax ID (Optional)</label>
-            <input type="text" name="taxID" value={orderData.taxID} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm" />
-          </div>
-        </div>
-        <div className="mt-6">
+      <CostumerForm orderData={orderData} handleChange={handleChange} />
+      </form>
+      <div className="mt-6">
           <button type="button" className="bg-green-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-700" onClick={handlePayment}>
             Cash On Delivery
           </button>
         </div>
-      </form>
     </div>
   );
 };
