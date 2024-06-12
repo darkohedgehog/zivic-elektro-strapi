@@ -1,10 +1,12 @@
 "use client";
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import CartPreview from './CartPreview';
+import { CartContext } from '@/app/context/CartContent';
 
 
-const Cart = (cart) => {
+const Cart = () => {
+  const { cart } = useContext(CartContext);
  
 
   return (

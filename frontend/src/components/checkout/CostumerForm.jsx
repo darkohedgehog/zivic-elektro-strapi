@@ -2,7 +2,7 @@ import React from 'react'
 
 const CostumerForm = ({orderData, handleChange}) => {
   return (
-    <div className='mt-5 block w-full h-full border-y-2 border-accent dark:border-accentDark rounded-lg shadow-2xl dark:shadow-gray'>
+    <div className='mt-5 block w-full h-full border-y-2 border-accent dark:border-accentDark rounded-lg shadow-2xl shadow-slate-500 dark:shadow-gray'>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-3 my-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Vaše ime</label>

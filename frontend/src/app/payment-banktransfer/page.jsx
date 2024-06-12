@@ -8,6 +8,8 @@ import jsPDF from 'jspdf';
 import bwipjs from 'bwip-js';
 import CustomerForm from '../../components/checkout/CostumerForm';
 import CartPreview from '@/components/cart/CartPreview';
+import { VscFilePdf } from "react-icons/vsc";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 
 const BankTransfer = () => {
@@ -274,7 +276,7 @@ const BankTransfer = () => {
       <form>
       <CustomerForm orderData={orderData} handleChange={handleChange} />
       </form>
-      <div className='flex flex-col my-20 h-[300px] w-full sm:w-[300px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl dark:shadow-gray z-20 mx-auto'>
+      <div className='flex flex-col my-20 h-[300px] w-full sm:w-[500px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl shadow-slate-500 dark:shadow-gray z-20 mx-auto'>
          <div className='mx-3 mt-4 overflow-auto'>
         <h3 className='mx-auto my-6 font-semibold text-accent dark:text-accentDark'>
           Podsjetite se šta ste kupili
@@ -283,8 +285,8 @@ const BankTransfer = () => {
         </div>
        </div>
       <div className="mt-6">
-        <div className='flex flex-col my-20 h-full w-full sm:w-[300px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl dark:shadow-gray z-20 mx-auto text-accent dark:text-accentDark'>
-        <h2 className="text-xl font-semibold mx-auto my-3">Podaci za uplatu:</h2>
+        <div className='flex flex-col my-20 h-full w-full sm:w-[500px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl shadow-slate-500 dark:shadow-gray z-20 mx-auto text-accent dark:text-accentDark'>
+        <h2 className="text-xl font-semibold mx-auto my-4">Podaci za uplatu:</h2>
         <p className='mx-3 text-sm mb-3'>Molimo da uplatite iznos sa Vaše narudžbe na:</p>
         <ul className="list-disc mx-5">
           <li className='mx-auto my-2'>Živić-Elektro j.d.o.o.</li>
@@ -294,20 +296,27 @@ const BankTransfer = () => {
           <li>Ukupan iznos za uplatu: <span>{orderData.totalAmount.toFixed(2)}€</span></li>
         </ul>
         </div>
+        <div className='flex flex-col my-20 h-full w-full sm:w-[500px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl shadow-slate-500 dark:shadow-gray z-20 mx-auto text-accent dark:text-accentDark'>
         <div className="mt-6">
-          <div className='mb-6'>
-            Ili jednostavno generišite PDF uplatnicu i skenirajte kod vašom m-banking aplikacijom
+          <div className='mx-3 text-sm mb-3'>
+            Ili jednostavno generišite PDF uplatnicu i skenirajte kod vašom aplikacijom za internet bankarstvo
           </div>
-          <button type="button" className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700" onClick={generatePDF}>
-            Uplatnica
+        </div>
+        <div className='my-6 mx-auto'>
+          <button type="button" className="button" onClick={generatePDF}>
+            <span className='mx-auto font-light uppercase flex gap-2'>
+              <VscFilePdf className='h-5 w-5' />
+              Uplatnica</span>
+          </button>
+          </div>
+        <div className='my-6 mx-auto'>
+        <button type="button" className="button" onClick={handlePayment}>
+            <span className='mx-auto font-light uppercase flex gap-2'>
+            <AiOutlineShoppingCart className='h-5 w-5' />
+              Naručite</span>
           </button>
         </div>
-        <div className='mt-6'>
-        <button type="button" className="bg-yellow-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-yellow-700" onClick={handlePayment}>
-            Potvrdite
-          </button>
         </div>
-        <p className="mt-4">Please use your Order ID as the payment reference.</p>
       </div>
     </div>
   );

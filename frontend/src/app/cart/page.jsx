@@ -8,6 +8,7 @@ import GlobalApi from '@/app/utils/GlobalApi';
 import { useUser } from '@clerk/nextjs';
 import { GiPayMoney } from "react-icons/gi";
 import { TbTransactionEuro } from "react-icons/tb";
+import { FaCcMastercard } from "react-icons/fa";
 import { CartContext } from '../context/CartContent';
 
 
@@ -255,7 +256,7 @@ const CartPage = () => {
                       className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
                       focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
                       text-[12px] px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition ml-2 shadow-lg flex gap-x-2 justify-center items-center"
-                    ><TbTransactionEuro className='w-6 h-6' />
+                    ><FaCcMastercard className='w-6 h-6' />
                       Plaćanje karticom
                     </Link>
                   </div>
