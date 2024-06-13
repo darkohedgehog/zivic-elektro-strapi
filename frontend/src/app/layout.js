@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider localization={hrTranslations}>
       <html lang="hr" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body className={`${inter.className} min-h-screen transition-colors duration-300 bg-gradient-light dark:bg-gradient-dark`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

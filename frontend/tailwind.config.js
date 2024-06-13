@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -26,16 +25,26 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "gradient-animation": {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "gradient": "gradient-animation 15s ease infinite",
+      },
+      backgroundImage: {
+        'gradient-light': 'linear-gradient(270deg, #F7F7F7, #dcdcdc, #c0c0c0)', // pearl white, stone, platinum
+        'gradient-dark': 'linear-gradient(270deg, #1b1b1b, #0a0a3d, #1f003d)', // space effect with black, blue, and purple shades
       },
       colors: {
         dark: "#1b1b1b",
         light: "#fff",
         accent: "#7B00D3",
-        accentDark: "#ffdb4d",
+        accentDark: "#9f86c0",
         gray: "#747474",
         darkblue: '#0a192f',
         darkpurple: '#6a0dad',

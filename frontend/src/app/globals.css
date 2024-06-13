@@ -75,4 +75,27 @@ body {
     filter: blur(50px);
   }
   
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .bg-gradient-light {
+    background: linear-gradient(270deg, #F7F7F7, #dcdcdc, #c0c0c0); /* pearl white, stone, platinum */
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+  }
+  
+  .bg-gradient-dark {
+    background: linear-gradient(270deg, #1b1b1b, #0a0a3d, #1f003d); /* space effect with black, blue, and purple shades */
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+  }
   
