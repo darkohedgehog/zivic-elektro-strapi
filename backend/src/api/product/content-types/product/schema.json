@@ -102,6 +102,9 @@
     },
     "bestSeller": {
       "type": "boolean"
+    },
+    "instantDelivery": {
+      "type": "boolean"
     }
   }
 }

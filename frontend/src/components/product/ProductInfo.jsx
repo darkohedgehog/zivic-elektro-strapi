@@ -4,6 +4,8 @@ import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import React, { useContext } from 'react'
 import { GiShoppingCart } from "react-icons/gi";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
+import { MdOutlineDoNotTouch } from "react-icons/md";
 
 const ProductInfo = ({ product }) => {
   const { user } = useUser();
@@ -71,6 +73,19 @@ const ProductInfo = ({ product }) => {
       </h2>
       <div className='text-[12px] mb-3'>
         {product?.attributes?.description ? renderDescription(product.attributes.description) : 'Nema opisa'}
+      </div>
+      <div className='flex gap-2 my-5 text-gray-500 text-[13px]'>
+        {product?.attributes.instantDelivery ? (
+          <>
+            <HiOutlineBadgeCheck className='text-green-500 h-5 w-5' />
+            <span>Proizvod je dostupan</span>
+          </>
+        ) : (
+          <>
+            <MdOutlineDoNotTouch className='text-yellow-400 h-5 w-5' />
+            <span>Proizvod nije dostupan</span>
+          </>
+        )}
       </div>
       <div className='text-[20px] text-darkblue dark:text-darkpurple font-medium mb-3'>
         €{product?.attributes?.price}

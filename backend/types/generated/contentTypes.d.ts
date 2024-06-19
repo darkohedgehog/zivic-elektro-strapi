@@ -959,6 +959,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       ]
     >;
     bestSeller: Attribute.Boolean;
+    instantDelivery: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
