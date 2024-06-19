@@ -1,4 +1,5 @@
 import Banner from "@/components/home/Banner";
+import BestSellers from "@/components/home/BestSellers";
 import CategorySection from "@/components/home/CategorySection";
 import GsapTextBanner from "@/components/home/GsapTextBanner";
 import ImageCarousel from "@/components/home/ImageCarousel";
@@ -14,6 +15,7 @@ export default function Home() {
     <ImageCarousel />
     <ProductSection />
     <CategorySection />
+    <BestSellers />
     </>
   );
 }

@@ -958,6 +958,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
         'Tinjalice'
       ]
     >;
+    bestSeller: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

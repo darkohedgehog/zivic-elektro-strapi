@@ -99,6 +99,9 @@
         "Modularne kutije",
         "Tinjalice"
       ]
+    },
+    "bestSeller": {
+      "type": "boolean"
     }
   }
 }

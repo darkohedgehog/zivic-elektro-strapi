@@ -48,7 +48,16 @@ const getProductListByCategoryAndSubCategory = (categoryName, subCategoryName) =
     });
 }
 
+//Add bestsellers products
 
+const getBestSellers = () => {
+    const url = `/products?filters[bestSeller][$eq]=true&populate=*`;
+    console.log(`Fetching bestsellers from URL: ${url}`); // Logovanje URL-a za debagovanje
+    return axiosClient.get(url).catch(error => {
+        console.error("API call error:", error.response); // Logovanje odgovora sa greškom
+        throw error;
+    });
+}
 
 
 
@@ -90,4 +99,5 @@ export default {
     getProductListByCategoryName,
     getSubCategoriesByCategory,
     getProductListByCategoryAndSubCategory,
+    getBestSellers
 };
