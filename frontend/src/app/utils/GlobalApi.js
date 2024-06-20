@@ -50,13 +50,15 @@ const getProductListByCategoryAndSubCategory = (categoryName, subCategoryName) =
 
 //Add bestsellers products
 
-const getBestSellers = () => {
+const getBestSellers = async () => {
     const url = `/products?filters[bestSeller][$eq]=true&populate=*`;
     console.log(`Fetching bestsellers from URL: ${url}`); // Logovanje URL-a za debagovanje
-    return axiosClient.get(url).catch(error => {
+    try {
+        return await axiosClient.get(url);
+    } catch (error) {
         console.error("API call error:", error.response); // Logovanje odgovora sa greškom
         throw error;
-    });
+    }
 }
 
 //Add slug for SEO
@@ -84,6 +86,9 @@ const clearCart = async () => {
     const deleteRequests = cartItems.data.data.map(item => deleteCartItem(item.id));
     await Promise.all(deleteRequests);
   };
+
+  //Get User Orders
+  const getUserOrders = () => axiosClient.get('/orders?populate[products]=*');
   
 
 export default {
@@ -102,4 +107,5 @@ export default {
     getProductListByCategoryAndSubCategory,
     getBestSellers,
     getProductBySlug,
+    getUserOrders,
 };
