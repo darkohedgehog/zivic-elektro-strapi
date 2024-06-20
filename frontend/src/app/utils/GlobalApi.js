@@ -59,7 +59,8 @@ const getBestSellers = () => {
     });
 }
 
-
+//Add slug for SEO
+const getProductBySlug = (slug) => axiosClient.get(`/products?filters[slug][$eq]=${slug}&populate=*`);
 
 //Add to Cart Collection
 const addToCart = (data) => axiosClient.post('/carts', data);
@@ -99,5 +100,6 @@ export default {
     getProductListByCategoryName,
     getSubCategoriesByCategory,
     getProductListByCategoryAndSubCategory,
-    getBestSellers
+    getBestSellers,
+    getProductBySlug,
 };

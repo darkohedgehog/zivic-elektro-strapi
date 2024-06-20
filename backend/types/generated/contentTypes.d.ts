@@ -960,6 +960,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     >;
     bestSeller: Attribute.Boolean;
     instantDelivery: Attribute.Boolean;
+    slug: Attribute.UID<'api::product.product', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

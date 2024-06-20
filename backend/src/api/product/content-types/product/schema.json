@@ -105,6 +105,10 @@
     },
     "instantDelivery": {
       "type": "boolean"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

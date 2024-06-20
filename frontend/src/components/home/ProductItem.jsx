@@ -11,7 +11,7 @@ const ProductItem = ({ product }) => {
 
   return (
     <Link 
-    href={'/product-detail/'+product.id}>
+    href={`/products/${product.attributes.slug}`}>
       <div className='flex justify-center items-center flex-col'>
         <Image
           src={imageUrl}
