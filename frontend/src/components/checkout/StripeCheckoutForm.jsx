@@ -37,16 +37,18 @@ const StripeCheckoutForm = ({ orderData, handlePayment, setError }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <PaymentElement />
+    <div >
+    <form onSubmit={handleSubmit}>
+      <PaymentElement className="mx-10 my-4 flex items-center justify-center" />
       <button
         type="submit"
         disabled={!stripe || loading}
-        className="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700"
+        className="button flex items-center justify-center my-10 mx-auto"
       >
-        {loading ? 'Processing...' : 'Pay with Card'}
+        {loading ? 'U tijeku...' : 'Platite'}
       </button>
     </form>
+    </div>
   );
 };
 

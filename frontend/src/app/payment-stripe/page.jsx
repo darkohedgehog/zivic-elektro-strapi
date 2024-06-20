@@ -8,6 +8,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import dynamic from 'next/dynamic';
 import { useUser } from '@clerk/nextjs';
 import CustomerForm from '../../components/checkout/CostumerForm';
+import CartPreview from '@/components/cart/CartPreview';
 
 // Load Stripe outside of a component’s render to avoid recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
@@ -175,19 +176,33 @@ const Checkout = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+      <h1 className="text-2xl font-bold mt-20 flex items-center justify-center text-accent dark:text-accentDark uppercase">Plaćanje
+      </h1>
+      <h2 className='text-xl font-semibold my-6 flex justify-center items-center text-accent dark:text-accentDark uppercase'
+      >Molimo popunite Vaše podatke
+      </h2>
       <div>
-        <form>
+        <form className='p-8 my-8'>
        <CustomerForm orderData={orderData} handleChange={handleChange} />
         </form>
+        <div className='flex flex-col my-20 h-[300px] w-full sm:w-[500px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl shadow-slate-500 dark:shadow-gray z-20 mx-auto'>
+         <div className='mx-3 mt-4 overflow-auto'>
+        <h3 className='mx-auto my-6 font-semibold text-accent dark:text-accentDark'>
+          Podsjetite se šta ste kupili
+        </h3>
+       <CartPreview />
+        </div>
+       </div>
+      <div className="flex flex-col my-20 h-full w-full sm:w-[500px] border-y-2 border-accent dark:border-accentDark rounded-lg shadow-xl shadow-slate-500 dark:shadow-gray z-20 mx-auto">
         {clientSecret && isClient && (
           <Elements stripe={stripePromise} options={{ clientSecret }}>
             <StripeCheckoutForm orderData={orderData} handlePayment={handlePayment} setError={setError} />
           </Elements>
         )}
+        </div>
       </div>
       {error && <p className="text-red-500 mt-4">{error}</p>}
-      {success && <p className="text-green-500 mt-4">Payment successful!</p>}
+      {success && <p className="text-green-500 mt-4">Plaćanje uspješno!</p>}
     </div>
   );
 };
