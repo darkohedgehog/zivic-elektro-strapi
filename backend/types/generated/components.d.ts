@@ -17,10 +17,26 @@ export interface ProductOrderDetails extends Schema.Component {
   };
 }
 
+export interface ProductProductQuantity extends Schema.Component {
+  collectionName: 'components_product_product_quantities';
+  info: {
+    displayName: 'product-quantity';
+  };
+  attributes: {
+    product: Attribute.Relation<
+      'product.product-quantity',
+      'oneToOne',
+      'api::product.product'
+    >;
+    Quantity: Attribute.Integer;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'product.order-details': ProductOrderDetails;
+      'product.product-quantity': ProductProductQuantity;
     }
   }
 }

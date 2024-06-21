@@ -63,6 +63,11 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "productQuantities": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.product-quantity"
     }
   }
 }

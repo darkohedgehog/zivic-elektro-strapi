@@ -7,16 +7,19 @@ const OrderList = ({ orders }) => {
         <div key={index} className='border p-4 mb-4'>
           <h3 className='text-[16px] font-bold'>Narudžba #{order.id}</h3>
           <p>Datum: {new Date(order?.attributes?.createdAt).toLocaleDateString()}</p>
-          <p>Status: {order?.attributes?.status}</p>
-          <p>Ukupno: €{order?.attributes?.totalAmount.toFixed(2)}</p>
+          <p>Način plaćanja: {order?.attributes?.paymentMethod}</p>
+          <p>Ukupno sa dostavom: €{order?.attributes?.totalAmount.toFixed(2)}</p>
           <p>Proizvodi:</p>
           <ul>
-            {Array.isArray(order?.attributes?.products?.data) && order.attributes.products.data.length > 0 ? (
-              order.attributes.products.data.map((product, idx) => (
-                <li key={idx}>
-                  {product?.attributes?.title} - {product?.attributes?.quantity} x €{product?.attributes?.price.toFixed(2)}
-                </li>
-              ))
+            {order?.attributes?.products?.data?.length > 0 ? (
+              order.attributes.products.data.map((product, idx) => {
+                const productQuantity = order?.attributes?.productQuantities?.find(pq => pq.productId === product.id)?.Quantity || 0;
+                return (
+                  <li key={idx}>
+                    {product?.attributes?.title} - {productQuantity} x €{product?.attributes?.price.toFixed(2)}
+                  </li>
+                );
+              })
             ) : (
               <li>Nema dostupnih proizvoda</li>
             )}

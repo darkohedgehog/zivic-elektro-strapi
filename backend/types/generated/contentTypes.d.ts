@@ -892,6 +892,7 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     >;
     quantity: Attribute.Integer;
     price: Attribute.Decimal;
+    productQuantities: Attribute.Component<'product.product-quantity', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

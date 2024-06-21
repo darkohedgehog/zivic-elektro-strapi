@@ -39,13 +39,15 @@ const getSubCategoriesByCategory = (categoryName) => {
     });
 }
 
-const getProductListByCategoryAndSubCategory = (categoryName, subCategoryName) => {
+const getProductListByCategoryAndSubCategory = async (categoryName, subCategoryName) => {
     const url = `/products?filters[category][$eq]=${categoryName}&filters[subCate][$eq]=${subCategoryName}&populate=*`;
     console.log(`Fetching products from URL: ${url}`); // Logovanje URL-a za debagovanje
-    return axiosClient.get(url).catch(error => {
+    try {
+        return await axiosClient.get(url);
+    } catch (error) {
         console.error("API call error:", error.response); // Logovanje odgovora sa greškom
         throw error;
-    });
+    }
 }
 
 //Add bestsellers products
@@ -88,7 +90,7 @@ const clearCart = async () => {
   };
 
   //Get User Orders
-  const getUserOrders = () => axiosClient.get('/orders?populate[products]=*');
+  const getUserOrders = (email) => axiosClient.get(`/orders?filters[email][$eq]=${email}&populate=products`);
   
 
 export default {

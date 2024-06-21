@@ -23,6 +23,7 @@ const CashOnDelivery = () => {
     paymentMethod: 'Cash On Delivery',
     totalAmount: 0,
     products: [],
+    productQuantities: [],
     quantity: 0,
     price: 0,
   });
@@ -44,8 +45,6 @@ const CashOnDelivery = () => {
     fetchCartItems();
   }, [user]);
 
-  
-
   useEffect(() => {
     let total = 0;
     const productDetails = cart.map(item => {
@@ -66,6 +65,7 @@ const CashOnDelivery = () => {
       ...prevState,
       totalAmount: total + 4.00,
       products: productDetails.map(detail => ({ id: detail.product, title: detail.title })),
+      productQuantities: productDetails.map(detail => ({ product: detail.product, Quantity: detail.quantity })),
       quantity: productDetails.reduce((sum, detail) => sum + detail.quantity, 0),
       price: total
     }));
@@ -88,11 +88,11 @@ const CashOnDelivery = () => {
         },
         body: JSON.stringify({ orderData }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to send email');
       }
-  
+
       console.log('Confirmation email sent successfully');
     } catch (error) {
       console.error('Error sending confirmation email:', error);
@@ -103,12 +103,12 @@ const CashOnDelivery = () => {
     try {
       const updatedOrderData = { ...orderData, paymentMethod: 'Cash On Delivery' };
       console.log('Order data before sending:', updatedOrderData);
-  
+
       const response = await GlobalApi.createOrder(updatedOrderData);
       console.log('Order created:', response.data);
       await GlobalApi.clearCart();
       setCart([]);
-  
+
       await sendConfirmationEmail(updatedOrderData);
       router.push('/order-success');
     } catch (error) {
@@ -120,7 +120,6 @@ const CashOnDelivery = () => {
     }
   };
 
-  
   return (
     <div className="container mx-auto p-28">
      <h1 
