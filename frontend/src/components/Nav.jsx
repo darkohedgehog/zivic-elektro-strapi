@@ -9,6 +9,7 @@ import GlobalApi from '@/app/utils/GlobalApi';
 import dynamic from 'next/dynamic';
 import Logo from './Logo';
 import { CartContext } from '@/app/context/CartContent';
+import { TbTruckDelivery } from "react-icons/tb";
 
 
 const DynamicCart = dynamic(() => import('./cart/Cart'), { ssr: false });
@@ -62,10 +63,18 @@ const Nav = () => {
             <>
               <div className='flex text-md gap-1 cursor-pointer' onClick={() => setOpenCart(!openCart)}>
                 <GiShoppingCart className='text-accent dark:text-accentDark w-6 h-6' />
-                <span>({cart?.length})</span>
+                <span className='text-yellow-400'>({cart?.length})</span>
               </div>
               <UserButton afterSignOutUrl='/' />
               {openCart && <DynamicCart />}
+                <Link 
+                href="/orders"
+                className='flex text-md gap-2 cursor-pointer'>
+                <TbTruckDelivery className='w-6 h-7 text-accent dark:text-accentDark' />
+                <span className='text-[12px] flex items-center justify-center text-yellow-400'>
+                  Narudžbe
+                  </span>
+                </Link>
             </>
           ) : (
             <>

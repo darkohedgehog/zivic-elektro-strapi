@@ -20,7 +20,9 @@ const UserOrders = () => {
 
   return (
     <div className='px-10 md:px-20 flex flex-col items-center justify-center pb-10 mt-28'>
-      <h2 className='text-[24px] uppercase font-bold mb-4 pb-7'>Moje narudžbe</h2>
+      <h2 className='text-[24px] uppercase font-bold mb-4 pb-7 text-accent dark:text-accentDark'>
+        Vaše narudžbe
+        </h2>
       {orders.length > 0 ? (
         <OrderList orders={orders} />
       ) : (
