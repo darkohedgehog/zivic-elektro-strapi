@@ -31,6 +31,7 @@ const Checkout = () => {
     paymentMethod: 'Card',
     totalAmount: 0,
     products: [],
+    productQuantities: [],
     quantity: 0,
     price: 0,
   });
@@ -87,8 +88,9 @@ const Checkout = () => {
 
     setOrderData(prevState => ({
       ...prevState,
-      totalAmount,
+      totalAmount: total + 4.00,
       products: productDetails.map(detail => ({ id: detail.product, title: detail.title })),
+      productQuantities: productDetails.map(detail => ({ product: detail.product, Quantity: detail.quantity })),
       quantity: productDetails.reduce((sum, detail) => sum + detail.quantity, 0),
       price: total
     }));

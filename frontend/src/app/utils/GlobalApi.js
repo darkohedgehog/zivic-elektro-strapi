@@ -90,7 +90,8 @@ const clearCart = async () => {
   };
 
   //Get User Orders
-  const getUserOrders = (email) => axiosClient.get(`/orders?filters[email][$eq]=${email}&populate=products`);
+  const getUserOrders = () => axiosClient.get('/orders?populate[products]=*&populate[productQuantities][populate]=product');
+
   
 
 export default {
