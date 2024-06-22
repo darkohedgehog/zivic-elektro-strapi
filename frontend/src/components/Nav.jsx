@@ -11,7 +11,7 @@ import Logo from './Logo';
 import { CartContext } from '@/app/context/CartContent';
 import { TbTruckDelivery } from "react-icons/tb";
 import { IoHomeOutline, IoStorefrontOutline, IoCallOutline } from "react-icons/io5";
-import { HiOutlineBuildingOffice } from "react-icons/hi2";
+import { FaBuildingUser } from "react-icons/fa6";
 
 
 const DynamicCart = dynamic(() => import('./cart/Cart'), { ssr: false });
@@ -123,7 +123,7 @@ const Nav = () => {
             <li>
               <Link href="/about"
                 className={`flex items-center justify-center gap-1 text-[12px] uppercase py-2 px-3 ${isActive('/about') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} dark:bg-dark rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/about') ? 'page' : undefined}>
-                  <HiOutlineBuildingOffice className='w-3 h-4' />
+                  <FaBuildingUser className='w-3 h-4' />
                     O nama
               </Link>
             </li>
