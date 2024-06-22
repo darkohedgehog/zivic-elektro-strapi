@@ -90,7 +90,8 @@ const clearCart = async () => {
   };
 
   //Get User Orders
-  const getUserOrders = () => axiosClient.get('/orders?populate[products]=*&populate[productQuantities][populate]=product');
+  const getUserOrders = () => axiosClient.get('/orders?populate[products][populate]=gallery&populate[productQuantities][populate]=product');
+
 
   
 

@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Html, Head, Preview, Body, Container, Heading, Text, Img } from '@react-email/components';
 
@@ -16,12 +15,13 @@ const OrderConfirmationEmail = ({ orderData }) => {
     totalAmount,
     products,
     quantity,
+    productQuantities,
     price,
   } = orderData;
 
-  const logo = {
-    margin: '0 auto',
-  };
+
+  // Log productQuantities to see what data it contains
+ // console.log("Product Quantities:", productQuantities);
 
   return (
     <Html>
@@ -34,7 +34,7 @@ const OrderConfirmationEmail = ({ orderData }) => {
             width={80}
             height={40}
             alt='logo'
-            style={logo}
+            style={{ margin: '0 auto' }}
           />
           <Heading>Vaša narudžba je uspješno kreirana</Heading>
           <Text>Poštovani {firstName} {lastName},</Text>
@@ -93,9 +93,15 @@ const OrderConfirmationEmail = ({ orderData }) => {
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>Proizvodi:</td>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>
                   <ul style={{ listStyleType: 'none', padding: 0 }}>
-                    {products.map((product, index) => (
-                      <li key={index} style={{ borderBottom: '1px solid #ddd', padding: '4px 0' }}>{product.title}</li>
-                    ))}
+                    {products.map((product, index) => {
+                      const productQuantity = productQuantities.find(pq => pq.product === product.id)?.Quantity || 0;
+                      console.log(`Product ID: ${product.id}, Quantity: ${productQuantity}`); // Log for each product
+                      return (
+                        <li key={index} style={{ borderBottom: '1px solid #ddd', padding: '4px 0' }}>
+                          {product.title} x {productQuantity} kom
+                        </li>
+                      );
+                    })}
                   </ul>
                 </td>
               </tr>
