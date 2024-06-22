@@ -10,6 +10,8 @@ import dynamic from 'next/dynamic';
 import Logo from './Logo';
 import { CartContext } from '@/app/context/CartContent';
 import { TbTruckDelivery } from "react-icons/tb";
+import { IoHomeOutline, IoStorefrontOutline, IoCallOutline } from "react-icons/io5";
+import { HiOutlineBuildingOffice } from "react-icons/hi2";
 
 
 const DynamicCart = dynamic(() => import('./cart/Cart'), { ssr: false });
@@ -113,22 +115,38 @@ const Nav = () => {
             className="flex flex-col p-4 mt-4 md:p-0 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-[#F7F7F7] dark:bg-dark md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <Link href="/"
-                className={`block py-2 px-3 ${isActive('/') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} dark:bg-dark rounded md:bg-transparent md:p-0`} aria-current={isActive('/') ? 'page' : undefined}>Naslovna
+                className={`flex items-center justify-center gap-1 py-2 px-3 ${isActive('/') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} dark:bg-dark rounded md:bg-transparent md:p-0`} aria-current={isActive('/') ? 'page' : undefined}>
+                  <IoHomeOutline className='w-3 h-4' />
+                  <span className='text-[12px] uppercase'>
+                    Naslovna
+                    </span>
               </Link>
             </li>
             <li>
               <Link href="/about"
-                className={`block py-2 px-3 ${isActive('/about') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} dark:bg-dark rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/about') ? 'page' : undefined}>O nama
+                className={`flex items-center justify-center gap-1 py-2 px-3 ${isActive('/about') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} dark:bg-dark rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/about') ? 'page' : undefined}>
+                  <HiOutlineBuildingOffice className='w-3 h-4' />
+                  <span className='text-[12px] uppercase'>
+                    O nama
+                    </span>
               </Link>
             </li>
             <li>
               <Link href="/shop"
-                className={`block py-2 px-3 ${isActive('/shop') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/services') ? 'page' : undefined}>Trgovina
+                className={`flex items-center justify-center gap-1 py-2 px-3 ${isActive('/shop') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/services') ? 'page' : undefined}>
+                  <IoStorefrontOutline className='w-3 h-4' />
+                  <span className='text-[12px] uppercase'>
+                    Trgovina
+                    </span>
               </Link>
             </li>
             <li>
               <Link href="/contact"
-                className={`block py-2 px-3 ${isActive('/contact') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/contact') ? 'page' : undefined}>Kontakt
+                className={`flex items-center justify-center gap-1 py-2 px-3 ${isActive('/contact') ? 'text-accent bg-transparent' : 'text-gray-900 dark:text-accentDark'} rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0`} aria-current={isActive('/contact') ? 'page' : undefined}>
+                  <IoCallOutline className='w-3 h-4' />
+                  <span className='text-[12px] uppercase'>
+                    Kontakt
+                    </span>
               </Link>
             </li>
           </ul>

@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/localizations": "^2.4.0",
     "@clerk/nextjs": "^5.0.9",
+    "@dotlottie/react-player": "^1.6.19",
     "@gsap/react": "^2.1.0",
     "@headlessui/react": "^1.7.19",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
