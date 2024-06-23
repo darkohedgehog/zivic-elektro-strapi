@@ -28,7 +28,7 @@ const GsapTextBanner = () => {
 
 
   return (
-    <div className='my-20 py-32 lg:flex items-center justify-center gap-x-24 text-3xl uppercase font-bold hidden'>
+    <div className='my-20 py-28 lg:flex items-center justify-center gap-x-24 text-3xl uppercase font-bold hidden'>
        <div className='stagger-text w-20 h-20 bg-transparent text-stone-500 dark:text-[#F7F7F7]'>MODERAN</div>
        <div className='stagger-text w-20 h-20 bg-transparent text-stone-500 dark:text-[#F7F7F7]'>IZGLED</div>
        <div className='stagger-text w-20 h-20 bg-transparent text-accent'>VAŠEG</div>

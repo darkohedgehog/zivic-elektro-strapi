@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ProductList from './ProductList';
 import GlobalApi from '@/app/utils/GlobalApi';
 import Link from 'next/link';
+import { PiCrownSimpleThin } from "react-icons/pi";
 
 
 
@@ -25,7 +26,11 @@ const ProductSection = () => {
   return productList&&(
     <div className='px-10 md:px-20 flex flex-col items-center justify-center pb-10'>
       <Link href={'/products'}>
-      <h2 className='text-[24px] uppercase font-bold mb-4 pb-7'>Najnovije u <span className='text-accent animate-pulse duration-300'>ponudi</span> </h2>
+      <h2 className='text-[24px] uppercase text-gray font-bold mb-4 pb-7 flex gap-2'>
+      <PiCrownSimpleThin className='w-6 h-9 text-accent dark:text-accentDark' />
+        Najnovije u
+        <span className='text-accent'> ponudi</span>
+       </h2>
       </Link>
         <ProductList productList = {productList} />
     </div>

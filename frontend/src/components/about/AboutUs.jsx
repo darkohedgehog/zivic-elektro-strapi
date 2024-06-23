@@ -77,7 +77,7 @@ const AboutUs = () => {
           Upisan u Trgovačkom sudu u Osijeku, MBS: 030125449.
           </p>
           <p className="my-1 text-gray">
-          Temeljni kapital 10,00 kn i uplaćen je u cjelosti.
+          Temeljni kapital 1,00 euro i uplaćen je u cjelosti.
           </p>
          <p className="my-1 text-gray">
          Pravno ustrojbeni oblik: jednostavno društvo sa ograničenom odgovornošću.
