@@ -6,11 +6,11 @@ const CategoryShopList = ({ categoryShopList }) => {
    
 
     if (!categoryShopList) {
-        return <div>Učitavam proizvode...</div>; // Or handle the undefined state appropriately
+        return <div>Učitavam proizvode...</div>;
     }
 
     return (
-        <div className='grid grid-cols-4 pt-16 mt-16'>
+        <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2'>
                 {categoryShopList.map((item, index) => (
                     <div key={index} >
                         <CategoryItem category={item} />

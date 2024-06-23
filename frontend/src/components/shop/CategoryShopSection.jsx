@@ -23,7 +23,10 @@ const CategoryShopSection = () => {
 
   return categoryShopList&&(
     <div className='px-10 md:px-20 pb-10'>
-      <h2 className='text-[24px] uppercase font-bold mb-4 pb-7'>Istražite <span className='text-accent animate-pulse duration-300'>kategorije</span> </h2>
+      <h2 className='text-[24px] uppercase font-bold mb-4 pb-7 flex gap-2 items-center justify-center'>
+        Istražite 
+        <span className='text-accent'>kategorije</span> 
+        </h2>
         <CategoryShopList categoryShopList = {categoryShopList} />
     </div>
   )

@@ -22,8 +22,9 @@ const AllProducts = ({ initialProductList }) => {
 
   return (
     <div className='w-full'>
-      <div className='flex justify-between mb-4'>
-        <select onChange={(e) => setCategoryFilter(e.target.value)} className='p-2 border'>
+      <div className='mb-4 gap-2 grid grid-cols-2 lg:grid lg:w-[300px]'>
+        <select onChange={(e) => setCategoryFilter(e.target.value)} 
+        className='p-2 border border-gray rounded-md bg-transparent text-accent dark:text-accentDark text-sm'>
           <option value=''>Sve kategorije</option>
           <option value='Status'>Status</option>
           <option value='Emporio'>Emporio</option>
@@ -36,13 +37,14 @@ const AllProducts = ({ initialProductList }) => {
           <option value='Grlo'>Grlo</option>
           <option value='Zvono'>Zvono</option>
         </select>
-        <select onChange={(e) => setPriceOrder(e.target.value)} className='p-2 border'>
-          <option value=''>Sortiraj po ceni</option>
-          <option value='asc'>Cena: Najniža</option>
-          <option value='desc'>Cena: Najviša</option>
+        <select onChange={(e) => setPriceOrder(e.target.value)} 
+        className='p-2 border border-gray rounded-md bg-transparent text-accent dark:text-accentDark text-sm'>
+          <option value=''>Sortiraj po cijeni</option>
+          <option value='asc'>Cijena: Najniža</option>
+          <option value='desc'>Cijena: Najviša</option>
         </select>
       </div>
-      <div className='grid grid-cols-4 pt-16 mt-16'>
+      <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 pt-16 mt-16'>
         {filteredProducts.map((item, index) => (
           <div key={index} className="flex-none basis-full md:basis-1/3 lg:basis-1/3 p-2">
             <ProductItem product={item} />

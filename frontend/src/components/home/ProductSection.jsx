@@ -28,8 +28,8 @@ const ProductSection = () => {
       <Link href={'/products'}>
       <h2 className='text-[24px] uppercase text-gray font-bold mb-4 pb-7 flex gap-2'>
       <PiCrownSimpleThin className='w-6 h-9 text-accent dark:text-accentDark' />
-        Najnovije u
-        <span className='text-accent'> ponudi</span>
+        Istražite
+        <span className='text-accent'> proizvode</span>
        </h2>
       </Link>
         <ProductList productList = {productList} />
