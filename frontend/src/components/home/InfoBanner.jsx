@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const InfoBanner = () => {
   return (
-    <div className="absolute h-20 bg-transparent left-1/2 -bottom-10 transform -translate-x-1/2 hidden lg:inline-flex items-center gap-x-12 pt-36 mt-32 text-gray">
+    <div className="absolute h-20 bg-transparent left-1/2 -bottom-10 transform -translate-x-1/2 hidden lg:inline-flex items-center gap-x-12 pt-36 mt-32 text-gray text-sm">
     <div className="flex items-center gap-5 w-60">
       <RiCustomerService2Line className="text-accent w-8 h-8" />
       <div>
@@ -34,7 +34,7 @@ const InfoBanner = () => {
       <FiMail className="text-accent w-8 h-8" />
       <div>
       <p className="font-semibold">Email</p>
-        <p>Pošaljite upit</p>
+        <p className='text-[12px]'>prodaja@zivic-elektro.com</p>
       </div>
     </Link>
   </div>

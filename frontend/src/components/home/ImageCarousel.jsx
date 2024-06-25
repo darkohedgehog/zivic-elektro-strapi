@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 
 const images = [
-  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1713901252/kombo_asliwa.png',
-  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1713901222/happy_usiuzb.png',
-  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1713901328/emorio_pqhljz.png',
-  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1713901293/setq_vohn9o.png'
+  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1706903635/kombo_metalka_pvmgdt.jpg',
+  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1706903556/emporio_metalka_r79yje.jpg',
+  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1706903880/status_metalka_rdkauy.jpg',
+  'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1706903597/set_q_og_metalka_a36uwz.jpg'
 ];
 
 const ImageCarousel = () => {
