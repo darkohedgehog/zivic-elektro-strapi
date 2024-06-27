@@ -58,12 +58,11 @@ const Nav = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <Logo />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-[#F7F7F7]"></span>
         </Link>
         <div className="flex md:order-2 gap-x-5 md:space-x-0 rtl:space-x-reverse">
           {user ? (
             <>
-              <div className='flex text-md gap-1 cursor-pointer' onClick={() => setOpenCart(!openCart)}>
+              <div className='flex text-md gap-1 cursor-pointer items-center justify-center' onClick={() => setOpenCart(!openCart)}>
                 <GiShoppingCart className='text-accent dark:text-accentDark w-6 h-6' />
                 <span className='text-yellow-400'>({cart?.length})</span>
               </div>
@@ -71,7 +70,7 @@ const Nav = () => {
               {openCart && <DynamicCart />}
                 <Link 
                 href="/orders"
-                className='flex text-md gap-2 cursor-pointer'>
+                className='flex text-md gap-2 cursor-pointer items-center justify-center'>
                 <TbTruckDelivery className='w-6 h-7 text-accent dark:text-accentDark' />
                 <span className='text-[12px] flex items-center justify-center text-yellow-400'>
                   Narudžbe
@@ -87,14 +86,18 @@ const Nav = () => {
                 text-sm px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800">
                 Prijava
               </Link>
-              <Link href={'/sign-up'}
+              {/* 
+                <Link href={'/sign-up'}
                 type="button"
                 className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
                 focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
                 text-sm px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800">
                 Registracija
               </Link>
-              <button onClick={handleToggle}
+              */}
+            </>
+          )}
+           <button onClick={handleToggle}
                 type="button"
                 className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded={isOpen}>
                 <span className="sr-only">Izbornik</span>
@@ -102,12 +105,10 @@ const Nav = () => {
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
                 </svg>
               </button>
-            </>
-          )}
+              <div className='flex md:order-2 gap-x-5 md:space-x-0 rtl:space-x-reverse'>
+              <ModeToggle />
         </div>
-        <div className='flex md:order-2 gap-x-5 md:space-x-0 rtl:space-x-reverse'>
-          <ModeToggle />
-        </div>
+        </div>  
         <div
           className={`items-center justify-between ${isOpen ? 'flex' : 'hidden'} w-full md:flex md:w-auto md:order-1`}
           id="navbar-sticky">
