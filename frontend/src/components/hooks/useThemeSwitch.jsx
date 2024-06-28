@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
+import { MdOutlineLightMode, MdOutlineDarkMode, MdOutlineSystemSecurityUpdateGood } from "react-icons/md";
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
@@ -25,13 +25,22 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem 
+        className='text-accent dark:text-accentDark gap-1 flex' 
+        onClick={() => setTheme("light")}>
+          <MdOutlineLightMode />
           Svjetla
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem 
+        className='text-accent dark:text-accentDark gap-1 flex' 
+        onClick={() => setTheme("dark")}>
+          <MdOutlineDarkMode />
           Tamna
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem 
+        className='text-accent dark:text-accentDark gap-1 flex' 
+        onClick={() => setTheme("system")}>
+          <MdOutlineSystemSecurityUpdateGood />
           Sistem
         </DropdownMenuItem>
       </DropdownMenuContent>
