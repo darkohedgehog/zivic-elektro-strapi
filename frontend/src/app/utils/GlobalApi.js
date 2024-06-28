@@ -92,7 +92,9 @@ const clearCart = async () => {
   //Get User Orders
   const getUserOrders = () => axiosClient.get('/orders?populate[products][populate]=gallery&populate[productQuantities][populate]=product');
 
-
+  // Blog
+  const getBlogs = () => axiosClient.get('/blogs?populate=*');
+  const getBlogBySlug = (slug) => axiosClient.get(`/blogs?filters[slug][$eq]=${slug}&populate=*`);
   
 
 export default {
@@ -112,4 +114,6 @@ export default {
     getBestSellers,
     getProductBySlug,
     getUserOrders,
+    getBlogs,
+    getBlogBySlug,
 };
