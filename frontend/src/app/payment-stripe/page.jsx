@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useContext, useEffect } from 'react';
-import { CartContext } from '../context/CartContent';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCart, clearCart } from '@/reducers/CartSlice';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
@@ -17,7 +18,8 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 const StripeCheckoutForm = dynamic(() => import('@/components/checkout/StripeCheckoutForm'), { ssr: false });
 
 const Checkout = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const cart = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
   const { user } = useUser();
   const [orderData, setOrderData] = useState({
     firstName: '',
@@ -46,7 +48,7 @@ const Checkout = () => {
     if (user && user.primaryEmailAddress) {
       try {
         const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
-        setCart(response.data.data);
+        dispatch(setCart(response.data.data));
       } catch (error) {
         console.error('Error fetching cart items:', error);
       }
@@ -161,7 +163,7 @@ const Checkout = () => {
       const response = await GlobalApi.createOrder(updatedOrderData);
       console.log('Order created:', response.data);
       await GlobalApi.clearCart();
-      setCart([]);
+      dispatch(clearCart());
   
       await sendConfirmationEmail(updatedOrderData); // Email se šalje nakon uspešnog kreiranja narudžbe
       setSuccess(true);
@@ -203,8 +205,8 @@ const Checkout = () => {
         )}
         </div>
       </div>
-      {error && <p className="text-red-500 mt-4">{error}</p>}
-      {success && <p className="text-green-500 mt-4">Plaćanje uspješno!</p>}
+      {error && <p className="text-red-500 my-8 flex items-center justify-center">{error}</p>}
+      {success && <p className="text-green-500 my-8 flex items-center justify-center">Plaćanje uspješno!</p>}
     </div>
   );
 };

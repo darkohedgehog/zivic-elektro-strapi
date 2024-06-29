@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useContext, useEffect } from 'react';
-import { CartContext } from '../context/CartContent';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCart, setCart } from '@/reducers/CartSlice';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
@@ -11,9 +12,9 @@ import CartPreview from '@/components/cart/CartPreview';
 import { VscFilePdf } from "react-icons/vsc";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-
 const BankTransfer = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const cart = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
   const { user } = useUser();
   const [orderData, setOrderData] = useState({
     firstName: '',
@@ -38,7 +39,7 @@ const BankTransfer = () => {
     if (user && user.primaryEmailAddress) {
       try {
         const response = await GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress);
-        setCart(response.data.data);
+        dispatch(setCart(response.data.data));
       } catch (error) {
         console.error('Error fetching cart items:', error);
       }
@@ -252,7 +253,7 @@ const BankTransfer = () => {
       const response = await GlobalApi.createOrder(updatedOrderData);
       console.log('Order created:', response.data);
       await GlobalApi.clearCart();
-      setCart([]);
+      dispatch(clearCart());
   
       await sendConfirmationEmail(updatedOrderData);
       localStorage.setItem('orderId', response.data.id);

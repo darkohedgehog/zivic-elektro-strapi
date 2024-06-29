@@ -37,17 +37,17 @@ const StripeCheckoutForm = ({ orderData, handlePayment, setError }) => {
   };
 
   return (
-    <div >
-    <form onSubmit={handleSubmit}>
-      <PaymentElement className="mx-10 my-4 flex items-center justify-center" />
-      <button
-        type="submit"
-        disabled={!stripe || loading}
-        className="button flex items-center justify-center my-10 mx-auto"
-      >
-        {loading ? 'U tijeku...' : 'Platite'}
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <PaymentElement className="mx-10 my-4 flex items-center justify-center" />
+        <button
+          type="submit"
+          disabled={!stripe || loading}
+          className="button flex items-center justify-center my-10 mx-auto"
+        >
+          {loading ? 'U tijeku...' : 'Platite'}
+        </button>
+      </form>
     </div>
   );
 };

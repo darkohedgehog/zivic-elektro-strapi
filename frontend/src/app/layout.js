@@ -27,11 +27,11 @@ export default function RootLayout({ children }) {
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange>
-            <Layout>
-              <Nav />
-              {children}
-              <Footer />
-            </Layout>
+              <Layout>
+                <Nav />
+                {children}
+                <Footer />
+              </Layout>
           </ThemeProvider>
         </body>
       </html>

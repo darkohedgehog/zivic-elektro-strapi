@@ -1,13 +1,11 @@
 "use client";
-import React, { useContext } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import CartPreview from './CartPreview';
-import { CartContext } from '@/app/context/CartContent';
-
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
-  const { cart } = useContext(CartContext);
- 
+  const cart = useSelector((state) => state.cart.cart);
 
   return (
     <div className='h-[350px] w-[300px] bg-gray/75 z-10 rounded-md absolute mx-auto top-14 p-5 border shadow-sm overflow-auto text-darkblue dark:text-accentDark'>

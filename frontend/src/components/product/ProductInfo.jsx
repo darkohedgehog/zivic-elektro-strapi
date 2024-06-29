@@ -1,16 +1,18 @@
-import { CartContext } from '@/app/context/CartContent';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import React, { useContext } from 'react'
+import React from 'react';
 import { GiShoppingCart } from "react-icons/gi";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { MdOutlineDoNotTouch } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '@/reducers/CartSlice';
 
 const ProductInfo = ({ product }) => {
   const { user } = useUser();
   const router = useRouter();
-  const { cart, setCart } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart);
 
   const onAddToCartClick = () => {
     if (!user) {
@@ -38,13 +40,13 @@ const ProductInfo = ({ product }) => {
             }
           };
           console.log('New product added to cart:', newProduct); // Dodato logovanje za novi proizvod
-          setCart(cart => [...cart, newProduct]);
+          dispatch(addToCart(newProduct));
         }
       }, (error) => {
         console.log("Error", error);
-      })
+      });
     }
-  }
+  };
 
   const renderDescription = (descArray) => {
     return descArray.map((item, index) => {
@@ -57,6 +59,7 @@ const ProductInfo = ({ product }) => {
           </p>
         );
       }
+      return null;
     });
   };
 
@@ -98,7 +101,7 @@ const ProductInfo = ({ product }) => {
         Košarica
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default ProductInfo;

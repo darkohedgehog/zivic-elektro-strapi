@@ -56,7 +56,7 @@ const BannerTwo = memo(() => {
             <p className="my-4 text-gray">
               Posjetite nas sada i osvijetlite svoj dom s našim vrhunskim proizvodima!
             </p>
-            <Link href={'/contact'} className="button uppercase text-sm mt-6">
+            <Link href={'/shop'} className="button uppercase text-sm mt-6">
               <span className='text-accent dark:text-accentDark flex gap-2'>
                 <GiShoppingCart className='w-4 h-5' />
                 Istraži

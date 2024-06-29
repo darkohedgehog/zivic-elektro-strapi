@@ -1,17 +1,17 @@
-"use client"
-import { CartContext } from '@/app/context/CartContent';
-import React, { useState } from 'react';
+"use client";
+
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../store'; 
 
 const Layout = ({ children }) => {
-
-    const [cart, setCart, clearCart] = useState([]);
-    
-   
   return (
-    <CartContext.Provider value={{cart,setCart, clearCart}}>
+    <Provider store={store}>
+      <div>
         {children}
-    </CartContext.Provider>
-  )
-}
+      </div>
+    </Provider>
+  );
+};
 
 export default Layout;
