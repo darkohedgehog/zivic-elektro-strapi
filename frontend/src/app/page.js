@@ -1,3 +1,4 @@
+import BlogSection from "@/components/blog/BlogSection";
 import Banner from "@/components/home/Banner";
 import BannerTwo from "@/components/home/BannerTwo";
 import BestSellers from "@/components/home/BestSellers";
@@ -18,6 +19,7 @@ export default function Home() {
     <ProductSection />
     <CategorySection />
     <BestSellers />
+    <BlogSection />
     </>
   );
 }
