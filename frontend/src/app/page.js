@@ -1,25 +1,25 @@
-import BlogSection from "@/components/blog/BlogSection";
-import Banner from "@/components/home/Banner";
-import BannerTwo from "@/components/home/BannerTwo";
-import BestSellers from "@/components/home/BestSellers";
-import CategorySection from "@/components/home/CategorySection";
-import GsapTextBanner from "@/components/home/GsapTextBanner";
-import ImageCarousel from "@/components/home/ImageCarousel";
-import ProductSection from "@/components/home/ProductSection";
+import React, { Suspense, lazy } from 'react';
 
-
+const BlogSection = lazy(() => import('@/components/blog/BlogSection'));
+const Banner = lazy(() => import('@/components/home/Banner'));
+const BannerTwo = lazy(() => import('@/components/home/BannerTwo'));
+const BestSellers = lazy(() => import('@/components/home/BestSellers'));
+const CategorySection = lazy(() => import('@/components/home/CategorySection'));
+const GsapTextBanner = lazy(() => import('@/components/home/GsapTextBanner'));
+const ImageCarousel = lazy(() => import('@/components/home/ImageCarousel'));
+const ProductSection = lazy(() => import('@/components/home/ProductSection'));
 
 export default function Home() {
   return (
-    <>
-    <Banner />
-    <BannerTwo />
-    <GsapTextBanner />
-    <ImageCarousel />
-    <ProductSection />
-    <CategorySection />
-    <BestSellers />
-    <BlogSection />
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Banner />
+      <BannerTwo />
+      <GsapTextBanner />
+      <ImageCarousel />
+      <ProductSection />
+      <CategorySection />
+      <BestSellers />
+      <BlogSection />
+    </Suspense>
   );
 }

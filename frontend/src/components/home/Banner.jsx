@@ -1,9 +1,10 @@
-"use client"
-import { useEffect, useState } from 'react';
+"use client";
+import { useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import Image from 'next/image';
-import InfoBanner from './InfoBanner';
+import dynamic from 'next/dynamic';
 
+const InfoBanner = dynamic(() => import('./InfoBanner'), { ssr: false });
 
 const images = [
   'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1710274217/home1.webp',
@@ -15,7 +16,7 @@ const images = [
 const Banner = () => {
   const [currentImage, setCurrentImage] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
     tl.to(".banner-content", { opacity: 0, duration: 0.5, ease: "power1.out" })
       .to(".banner-content", { opacity: 1, duration: 0.5, ease: "power1.in" });
@@ -38,14 +39,14 @@ const Banner = () => {
         </div>
       </div>
       <Image
-      width={1920}
-      height={1080}
-      src={images[currentImage]}
-      className="w-full h-[calc(100vh-4rem)] object-cover object-center transition-opacity duration-1000 ease-linear" 
-      alt="Elektromaterijali"
-      priority = {true}
-       />
-       <InfoBanner />
+        width={1920}
+        height={1080}
+        src={images[currentImage]}
+        className="w-full h-[calc(100vh-4rem)] object-cover object-center transition-opacity duration-1000 ease-linear" 
+        alt="Elektromaterijali"
+        priority={true}
+      />
+      <InfoBanner />
     </div>
   );
 };
