@@ -1,9 +1,12 @@
+import Terms from '@/components/terms/Terms'
 import React from 'react'
 
-const Terms = () => {
+const TermsPage = () => {
   return (
-    <div>Terms</div>
+    <>
+    <Terms />
+    </>
   )
 }
 
-export default Terms
+export default TermsPage
