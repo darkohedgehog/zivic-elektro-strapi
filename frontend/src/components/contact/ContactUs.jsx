@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React from 'react'
-import { FiFacebook, FiInstagram } from "react-icons/fi";
+import { FiFacebook } from "react-icons/fi";
 import { RiMessengerLine, RiLinkedinBoxFill } from "react-icons/ri";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
 const ContactUs = () => {
   return (
-    <section className="container my-6">
+    <section className="container my-16">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
         <div className="max-w-2xl lg:max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-accent dark:text-accentDark uppercase animate-pulse duration-50">
