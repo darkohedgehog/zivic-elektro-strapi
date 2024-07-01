@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation'; // Import from next/navigation
+import { useParams } from 'next/navigation';
 import GlobalApi from '@/app/utils/GlobalApi';
 import FilteredProductList from '@/components/home/FilteredProductList';
 import SubCategoryList from '@/components/home/SubCategoryList';
+import Link from 'next/link';
+import { TiArrowBackOutline } from "react-icons/ti";
 
 const CategoryPage = () => {
   const params = useParams(); // Using useParams to get params from URL
@@ -36,17 +38,29 @@ const CategoryPage = () => {
   }, [categoryName]);
 
   return (
-    <div className='px-10 md:px-20 flex flex-col items-center justify-center pb-10'>
-      <h2 className='text-[24px] uppercase font-bold mb-4 pb-7'>
-        {categoryName === "Kombo" ? "Podkategorije" : "Proizvodi po kategoriji"}
+    <div className='py-28'>
+      <h2 className='text-2xl uppercase font-semibold flex items-center justify-center mb-10 text-accent'>
+        {categoryName === "Kombo" ? "Modularni program Kombo" : "Proizvodi po kategoriji"}
       </h2>
-      {categoryName === "Kombo" && subCategories.length > 0 ? (
-        <SubCategoryList subCategories={subCategories} categoryName={categoryName} />
-      ) : productList.length > 0 ? (
-        <FilteredProductList productList={productList} />
-      ) : (
-        <div>Učitavam proizvode...</div>
-      )}
+      
+        {categoryName === "Kombo" && subCategories.length > 0 ? (
+          <SubCategoryList subCategories={subCategories} categoryName={categoryName} />
+        ) : productList.length > 0 ? (
+          <FilteredProductList productList={productList} />
+        ) : (
+          <div>Učitavam proizvode...</div>
+        )}
+      <div className='flex items-center justify-center my-8'>
+      <Link 
+      href={'/shop'}>
+        <button className='button'>
+          <span className='text-accent dark:text-accentDark uppercase text-sm flex items-center justify-center gap-2'>
+          <TiArrowBackOutline className='w-5 h-5' />
+            Nazad
+            </span>
+        </button>  
+      </Link>
+      </div>
     </div>
   );
 };

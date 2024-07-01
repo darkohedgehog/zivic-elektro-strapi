@@ -1,9 +1,10 @@
 "use client";
-
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation'; // Import from next/navigation
+import { useParams } from 'next/navigation'; 
 import GlobalApi from '@/app/utils/GlobalApi';
 import FilteredProductList from '@/components/home/FilteredProductList';
+import Link from 'next/link';
+import { TiArrowBackOutline } from "react-icons/ti";
 
 const SubCategoryPage = () => {
   const params = useParams(); // Using useParams to get params from URL
@@ -27,13 +28,22 @@ const SubCategoryPage = () => {
   }, [categoryName, subCategoryName]);
 
   return (
-    <div className='px-10 md:px-20 flex flex-col items-center justify-center pb-10'>
-      <h2 className='text-[24px] uppercase font-bold mb-4 pb-7'>Proizvodi po kategoriji i podkategoriji</h2>
+    <div className='px-10 md:px-20 flex flex-col items-center justify-center py-28'>
+      <h2 className='text-2xl uppercase font-semibold my-4 pb-7 text-accentDark'>Proizvodi kategorije Kombo</h2>
       {productList.length > 0 ? (
         <FilteredProductList productList={productList} />
       ) : (
         <div>Učitavam proizvode...</div>
       )}
+      <Link 
+      href={`/category/${categoryName}`}>
+        <button className='button mt-10'>
+          <span className='text-accent dark:text-accentDark uppercase text-sm flex items-center justify-center gap-2'>
+          <TiArrowBackOutline className='w-5 h-5' />
+            Nazad
+            </span>
+        </button>  
+      </Link>
     </div>
   );
 };

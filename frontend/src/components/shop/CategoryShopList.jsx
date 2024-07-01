@@ -10,7 +10,7 @@ const CategoryShopList = ({ categoryShopList }) => {
     }
 
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 text-accent dark:text-accentDark'>
+        <div className='grid grid-cols-2 gap-4 lg:grid-cols-4 md:grid-cols-2 text-accent dark:text-accentDark'>
                 {categoryShopList.map((item, index) => (
                     <div key={index} >
                         <CategoryItem category={item} />

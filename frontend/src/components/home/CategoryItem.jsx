@@ -13,10 +13,10 @@ const CategoryItem = ({ category }) => {
           <Image
             src={cateThumbUrl}
             alt='banner'
-            width={400}
+            width={350}
             height={350}
             priority={false}
-            className='w-48 h-48 rounded-lg shadow-lg object-cover'
+            className='w-48 h-48 rounded-lg shadow-lg shadow-gray object-cover'
           />
         </Link>
         <div className='flex flex-col mx-auto'>

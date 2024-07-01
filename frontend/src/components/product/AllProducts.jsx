@@ -22,7 +22,7 @@ const AllProducts = ({ initialProductList }) => {
 
   return (
     <div className='w-full'>
-      <div className='mb-4 gap-2 grid grid-cols-2 lg:grid lg:w-[300px]'>
+      <div className='my-8 gap-2 grid grid-cols-2 lg:grid lg:w-[300px]'>
         <select onChange={(e) => setCategoryFilter(e.target.value)} 
         className='p-2 border border-gray rounded-md bg-transparent text-accent dark:text-accentDark text-sm'>
           <option value=''>Sve kategorije</option>
@@ -44,7 +44,7 @@ const AllProducts = ({ initialProductList }) => {
           <option value='desc'>Cijena: Najviša</option>
         </select>
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 pt-16 mt-16'>
+      <div className='grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 pt-16 mt-16'>
         {filteredProducts.map((item, index) => (
           <div key={index} className="flex-none basis-full md:basis-1/3 lg:basis-1/3 p-2">
             <ProductItem product={item} />
