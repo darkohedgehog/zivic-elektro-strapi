@@ -23,14 +23,14 @@ const ProductItem = ({ product }) => {
         />
         <div className='flex flex-col mx-auto'>
         <div className='p-3'>
-          <h2 className='text-[14px] font-medium line-clamp-1'>{product?.attributes?.title}</h2>
+          <h2 className='text-[14px] font-medium line-clamp-1 text-gray'>{product?.attributes?.title}</h2>
           {product?.attributes?.category&& 
           <h2 className='text-[12px] text-accent flex gap-2 mt-2'>
             <PiArrowSquareRightThin className='w-5 h-5' />
             {product?.attributes?.category}
             </h2>}
         </div>
-        <h2 className='text-[12px] ml-3 font-bold'>€{product?.attributes?.price}</h2>
+        <h2 className='text-[12px] ml-3 font-bold text-gray'>€{product?.attributes?.price}</h2>
         </div>
       </div>
     </Link>
