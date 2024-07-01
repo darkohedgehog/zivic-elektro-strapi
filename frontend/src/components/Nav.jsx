@@ -13,6 +13,7 @@ import { setCart } from '@/reducers/CartSlice';
 import { TbTruckDelivery } from "react-icons/tb";
 import { IoHomeOutline, IoStorefrontOutline, IoCallOutline } from "react-icons/io5";
 import { FaBuildingUser } from "react-icons/fa6";
+import { MdOutlineManageAccounts } from "react-icons/md";
 
 const DynamicCart = dynamic(() => import('./cart/Cart'), { ssr: false });
 
@@ -81,10 +82,11 @@ const Nav = () => {
             <>
               <Link href={'/sign-in'}
                 type="button"
-                className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
-                focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
-                text-sm px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800">
-                Prijava
+                className="text-darkblue bg-accent hover:bg-[#C9A0DC] focus:ring-4 
+                focus:outline-none focus:ring-[#9A4EAE] rounded-lg 
+                text-[10px] px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 flex items-center justify-center gap-2 uppercase">
+                  <MdOutlineManageAccounts className='w-4 h-4' />
+                Nalog
               </Link>
               {/* 
                 <Link href={'/sign-up'}
