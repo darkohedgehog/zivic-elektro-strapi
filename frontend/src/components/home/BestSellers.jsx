@@ -27,7 +27,7 @@ const BestSellers = memo(() => {
   }, []);
 
   return (
-    <div className='px-10 md:px-20 flex flex-col items-center justify-center pb-10'>
+    <div className='px-10 md:px-20 flex flex-col items-center justify-center py-10 mt-3'>
       <h2 className='text-[24px] uppercase font-bold mb-4 pb-7 text-gray flex gap-2'>
         <PiCrownSimpleThin className='w-6 h-9 text-accent dark:text-accentDark' />
         Najprodavaniji

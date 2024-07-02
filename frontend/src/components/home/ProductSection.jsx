@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { PiCrownSimpleThin } from "react-icons/pi";
 import GlobalApi from '@/app/utils/GlobalApi';
+import ButtonStyle from './ButtonStyle';
 
 // Lazy load ProductList component
 const ProductList = dynamic(() => import('./ProductList'), { ssr: false });
@@ -38,6 +39,11 @@ const ProductSection = memo(() => {
         Ukrasite vaš dom sa našim proizvodima
       </p>
       <ProductList productList={productList} />
+      <div className='mt-8'>
+        <Link href={'/products'}>
+      <ButtonStyle />
+       </Link>
+      </div>
     </div>
   );
 });

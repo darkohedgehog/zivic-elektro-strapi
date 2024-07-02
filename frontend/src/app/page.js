@@ -9,6 +9,7 @@ const GsapTextBanner = lazy(() => import('@/components/home/GsapTextBanner'));
 const ImageCarousel = lazy(() => import('@/components/home/ImageCarousel'));
 const ProductSection = lazy(() => import('@/components/home/ProductSection'));
 const BannerThree = lazy(() => import('@/components/home/BannerThree'));
+const CardSection = lazy(() => import('@/components/home/CardSection'));
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <BannerThree />
       <CategorySection />
       <BestSellers />
+      <CardSection />
       <BlogSection />
     </Suspense>
   );

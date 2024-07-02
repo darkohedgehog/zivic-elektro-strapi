@@ -2,10 +2,11 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { memo } from 'react';
+import ButtonStyle from './ButtonStyle';
 
 const PiCrownSimpleThin = dynamic(() => import("react-icons/pi").then((mod) => mod.PiCrownSimpleThin), { ssr: false });
 const PiShootingStar = dynamic(() => import("react-icons/pi").then((mod) => mod.PiShootingStar), { ssr: false });
-const IoIosSearch = dynamic(() => import("react-icons/io").then((mod) => mod.IoIosSearch), { ssr: false });
+
 
 const images = [
     'https://res.cloudinary.com/dhkmlqg4o/image/upload/v1719864633/bannersection4_v7x7w5.webp',
@@ -49,12 +50,11 @@ const BannerThree = memo(() => {
           <h3 className='text-lg font-medium text-accent dark:text-accentDark uppercase flex items-center justify-center gap-2 my-7 text-center'>
             Uljepšajte djetetov kutak!
           </h3>
-          <Link href={'/category/Happy'} className='flex items-center justify-center mt-12'>
-            <button className='button gap-2 uppercase flex items-center'>
-              <IoIosSearch className='w-5 h-5 text-accent dark:text-accentDark' />
-              <span className='text-accent dark:text-accentDark text-sm'>Istraži</span>
-            </button>
-          </Link>
+          <div className='mt-8'>
+            <Link href={'/category/Happy'}>
+          <ButtonStyle />
+            </Link>
+         </div>
         </div>
       </section>
     );
