@@ -298,15 +298,16 @@ body {
     position: relative;
     width: 190px;
     height: 254px;
-    background-color: #39375b;
+    background-color: #011638;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     padding: 12px;
-    gap: 12px;
+    padding-bottom: 25px;
+    gap: 16px;
+    text-align: center;
     border-radius: 8px;
     cursor: pointer;
-    color: white;
   }
   
   .card::before {
@@ -332,21 +333,6 @@ body {
     background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
     transform: translate3d(0, 0, 0) scale(0.95);
     filter: blur(20px);
-  }
-  
-  .heading {
-    font-size: 20px;
-    text-transform: capitalize;
-    font-weight: 700;
-  }
-  
-  .card p:not(.heading) {
-    font-size: 14px;
-  }
-  
-  .card p:last-child {
-    color: #e81cff;
-    font-weight: 600;
   }
   
   .card:hover::after {

@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { CiTrash } from 'react-icons/ci';
-import Link from 'next/link';
 import GlobalApi from '@/app/utils/GlobalApi';
 import { useUser } from '@clerk/nextjs';
 import { useDispatch, useSelector } from 'react-redux';

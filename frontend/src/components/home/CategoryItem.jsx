@@ -21,7 +21,7 @@ const CategoryItem = ({ category }) => {
         </Link>
         <div className='flex flex-col mx-auto'>
           <div className='p-3'>
-            <h2 className='text-[14px] font-medium line-clamp-1'>{category.attributes.cate}</h2>
+            <h2 className='text-[14px] font-medium line-clamp-1 text-gray'>{category.attributes.cate}</h2>
           </div>
         </div>
       </div>
