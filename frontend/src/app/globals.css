@@ -9,20 +9,6 @@ html{
     padding: 0;
 }
 
-body {
-    @apply bg-[#fff]
-}
-
-.dark body {
-    @apply bg-[#1b1b1b]
-}
-
-/* Definiranje prilagođene klase u globalnom CSS fajlu 
-@layer utilities {
-    .dark body {
-      background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(151,41,247,1) 0%, rgba(24,22,39,1) 90%);
-    }
-  }*/
 
   /*BUTTON STYLING*/
   .button {
@@ -91,7 +77,7 @@ body {
   
   /* BACKGROUND STYLING*/
   .bg-gradient-light {
-    background: linear-gradient(270deg, #F7F7F7, #dcdcdc, #c0c0c0); /* pearl white, stone, platinum */
+    background: linear-gradient(270deg, #dbdaea, #dcdcdc, #c0c0c0); /* lavender, stone, platinum */
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
   }

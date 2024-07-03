@@ -37,7 +37,7 @@ module.exports = {
         "gradient": "gradient-animation 15s ease infinite",
       },
       backgroundImage: {
-        'gradient-light': 'linear-gradient(270deg, #F7F7F7, #dcdcdc, #c0c0c0)', // pearl white, stone, platinum
+        'gradient-light': 'linear-gradient(270deg, #dbdaea, #dcdcdc, #c0c0c0)', // lavender, stone, platinum
         'gradient-dark': 'linear-gradient(270deg, #1b1b1b, #0a0a3d, #1f003d)', // space effect with black, blue, and purple shades
       },
       colors: {
