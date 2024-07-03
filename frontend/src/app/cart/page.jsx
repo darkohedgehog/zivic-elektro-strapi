@@ -87,7 +87,7 @@ const CartPage = () => {
   };
 
   return (
-    <section>
+    <section className='px-auto py-10 ml-2'>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 text-darkblue dark:text-darkpurple">
         <div className="mx-auto max-w-3xl">
           <header className="text-center">
@@ -174,27 +174,27 @@ const CartPage = () => {
             <div className="mt-8 flex justify-end border-t border-gray-100 pt-8">
               <div className="w-screen max-w-lg space-y-4">
                 <dl className="space-y-0.5 text-sm text-gray-700">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mx-2">
                     <dt>Međusuma</dt>
                     <dd>€{subtotal.toFixed(2)}</dd>
                   </div>
 
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mx-2">
                     <dt>PDV</dt>
                     <dd>€{vat.toFixed(2)}</dd>
                   </div>
 
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mx-2">
                     <dt>Popust</dt>
                     <dd>-€{discount.toFixed(2)}</dd>
                   </div>
 
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mx-2">
                     <dt>Dostava</dt>
                     <dd>€{shipping.toFixed(2)}</dd>
                   </div>
 
-                  <div className="flex justify-between !text-base font-medium">
+                  <div className="flex justify-between !text-base font-medium mx-2">
                     <dt>Ukupno</dt>
                     <dd>€{total.toFixed(2)}</dd>
                   </div>
@@ -226,7 +226,7 @@ const CartPage = () => {
                     href="/payment-cash"
                     className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
                     focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
-                    text-[12px] px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition ml-2 shadow-lg flex gap-x-2 justify-center items-center"
+                    text-[12px] px-3 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition shadow-lg flex gap-x-2 justify-center items-center"
                   ><GiPayMoney className='w-6 h-6' />
                     Plaćanje pouzećem
                   </Link>
@@ -234,7 +234,7 @@ const CartPage = () => {
                     href="/payment-banktransfer"
                     className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
                     focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
-                    text-[12px] px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition ml-2 shadow-lg flex gap-x-2 justify-center items-center"
+                    text-[12px] px-3 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition shadow-lg flex gap-x-2 justify-center items-center"
                   ><TbTransactionEuro className='w-6 h-6' />
                     Bankarska transakcija
                   </Link>
@@ -242,7 +242,7 @@ const CartPage = () => {
                     href="/payment-stripe"
                     className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
                     focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
-                    text-[12px] px-4 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition ml-2 shadow-lg flex gap-x-2 justify-center items-center"
+                    text-[12px] px-3 py-2 text-center dark:bg-accent dark:hover:bg-[#C9A0DC] dark:focus:ring-blue-800 transition shadow-lg flex gap-x-2 justify-center items-center"
                   ><FaCcMastercard className='w-6 h-6' />
                     Plaćanje karticom
                   </Link>

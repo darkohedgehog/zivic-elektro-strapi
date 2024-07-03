@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import React from 'react'
+import React, { memo } from 'react'
 import { FiFacebook } from "react-icons/fi";
 import { RiMessengerLine, RiLinkedinBoxFill } from "react-icons/ri";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
-const ContactUs = () => {
+const ContactUs = memo (() => {
   return (
     <section className="container my-16">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
@@ -88,6 +88,6 @@ const ContactUs = () => {
       </div>
     </section>
   )
-}
+})
 
 export default ContactUs;

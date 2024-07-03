@@ -24,10 +24,12 @@ const CategoryShopSection = () => {
 
   return categoryShopList&&(
     <div className='px-10 md:px-20 pb-10'>
-      <h2 className='text-[24px] uppercase text-gray font-bold flex gap-2 items-center justify-center'>
+      <div className='flex flex-wrap items-center justify-center gap-2'>
+      <h2 className='text-[24px] uppercase text-gray font-bold'>
         Pogledajte našu
-        <span className='text-accent'>ponudu</span> 
         </h2>
+        <span className='text-accent text-[24px] uppercase font-bold'>ponudu</span> 
+        </div>
         <CategoryIntro />
         <CategoryShopList categoryShopList = {categoryShopList} />
     </div>

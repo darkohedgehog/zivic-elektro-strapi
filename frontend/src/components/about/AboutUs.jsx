@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React, { memo } from 'react'
 import { IoCallOutline } from "react-icons/io5";
 
 
 const images ='https://res.cloudinary.com/dhkmlqg4o/image/upload/v1710274217/home1.webp';
 
-const AboutUs = () => {
+const AboutUs = memo (() => {
   return (
     <>
     <section>
@@ -93,6 +93,6 @@ const AboutUs = () => {
 </section>
     </>
   )
-}
+})
 
 export default AboutUs

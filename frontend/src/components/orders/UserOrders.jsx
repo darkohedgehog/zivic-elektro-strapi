@@ -1,10 +1,13 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import GlobalApi from '@/app/utils/GlobalApi';
 import OrderList from '@/components/orders/OrderList';
 import { useUser } from '@clerk/nextjs';
+import Link from 'next/link';
+const GiShoppingCart = dynamic(() => import('react-icons/gi').then((mod) => mod.GiShoppingCart), { ssr: false });
 
-const UserOrders = () => {
+const UserOrders = memo (() => {
   const { user } = useUser();
   const [orders, setOrders] = useState([]);
 
@@ -28,8 +31,16 @@ const UserOrders = () => {
       ) : (
         <div>Učitavam narudžbe...</div>
       )}
+      <div className='flex items-center justify-center py-8'>
+              <Link href={'/shop'} className="button uppercase text-sm mt-6">
+              <span className='text-accent dark:text-accentDark flex gap-2'>
+                <GiShoppingCart className='w-4 h-5' />
+                Trgovina
+              </span>
+            </Link>
+      </div>
     </div>
   );
-};
+});
 
 export default UserOrders;
