@@ -5,8 +5,11 @@ import React from 'react';
 import { GiShoppingCart } from "react-icons/gi";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { MdOutlineDoNotTouch } from "react-icons/md";
+import { LiaCashRegisterSolid } from "react-icons/lia";
+import { IoReturnDownBackOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/reducers/CartSlice';
+import Link from 'next/link';
 
 const ProductInfo = ({ product }) => {
   const { user } = useUser();
@@ -74,7 +77,7 @@ const ProductInfo = ({ product }) => {
       <h2 className='text-[15px] text-accent dark:text-accentDark mb-2'>
         {product?.attributes?.category}
       </h2>
-      <div className='text-[12px] mb-3'>
+      <div className='text-[12px] mb-3 text-gray'>
         {product?.attributes?.description ? renderDescription(product.attributes.description) : 'Nema opisa'}
       </div>
       <div className='flex gap-2 my-5 text-gray-500 text-[13px]'>
@@ -85,7 +88,7 @@ const ProductInfo = ({ product }) => {
           </>
         ) : (
           <>
-            <MdOutlineDoNotTouch className='text-yellow-400 h-5 w-5' />
+            <MdOutlineDoNotTouch className='text-red-700 h-5 w-5' />
             <span>Proizvod nije dostupan</span>
           </>
         )}
@@ -94,12 +97,27 @@ const ProductInfo = ({ product }) => {
         €{product?.attributes?.price}
       </div>
       <button 
-        className='flex gap-2 p-4 px-10 mt-5 bg-accent text-light rounded-lg uppercase hover:bg-darkpurple'
+        className='button gap-1 mt-5 p-4 uppercase'
         onClick={() => onAddToCartClick()}
       >
-        <GiShoppingCart className='w-5 h-5' />
-        Košarica
+        <GiShoppingCart className='w-5 h-5 text-accentDark' />
+       <span className='text-accentDark text-[10px]'>
+       U košaricu
+       </span> 
       </button>
+      <Link href={'/cart'}>
+      <button className='button mt-8 uppercase'>
+      <LiaCashRegisterSolid className='w-5 h-5 text-accentDark' />
+      <span className='text-accentDark text-[10px]'>
+       Kupovina
+       </span> 
+      </button>
+      </Link>
+      <Link href={'/products'}
+      className='mt-14 flex gap-4 text-accent dark:text-accentDark items-center text-xl font-semibold'>
+      <IoReturnDownBackOutline className='w-5 h-5' />
+      Proizvodi
+      </Link>
     </div>
   );
 };

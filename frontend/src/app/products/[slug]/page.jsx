@@ -49,12 +49,12 @@ const ProductPage = ({ params }) => {
   return (
     <div className='p-5 py-20 px-10 md:px-28'>
       <Head>
-        <title>{product?.attributes?.title} - My Store</title>
+        <title>{product?.attributes?.title} Živić-Elektro</title>
         <meta name="description" content={product?.attributes?.description} />
         <meta property="og:title" content={product?.attributes?.title} />
         <meta property="og:description" content={product?.attributes?.description} />
         <meta property="og:image" content={product?.attributes?.thumbnail?.data[0]?.attributes?.url} />
-        <meta property="og:url" content={`https://my-store.com/products/${product?.attributes?.slug}`} />
+        <meta property="og:url" content={`https://zivic-elektro.hr/products/${product?.attributes?.slug}`} />
       </Head>
       <BreadCrump path={path} />
       {productDetail ? (

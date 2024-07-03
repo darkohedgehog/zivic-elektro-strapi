@@ -31,6 +31,7 @@ const AllProducts = ({ initialProductList }) => {
           <option value='OG program'>OG program</option>
           <option value='Kombo'>Kombo</option>
           <option value='Premijer +'>Premijer +</option>
+          <option value='Happy'>Happy</option>
           <option value='Elektroinstalacijski pribor'>Elektroinstalacijski pribor</option>
           <option value='Kutije'>Kutije</option>
           <option value='Prijenosne priključnice'>Prijenosne priključnice</option>

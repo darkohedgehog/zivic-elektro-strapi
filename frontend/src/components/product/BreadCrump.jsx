@@ -5,9 +5,9 @@ const BreadCrump = ({path}) => {
   return (
 
 <nav aria-label="Breadcrumb">
-  <ol className="flex items-center gap-1 text-sm text-gray-600">
+  <ol className="flex items-center gap-1 text-sm text-gray pt-8">
     <li>
-      <Link href="/" className="block transition hover:text-gray-700">
+      <Link href="/" className="block transition hover:text-indigo-400">
         <span className="sr-only"> Naslovna </span>
 
         <svg
