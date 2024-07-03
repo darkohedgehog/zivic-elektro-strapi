@@ -108,7 +108,7 @@ html{
     animation-iteration-count: infinite; 
   }
 
-  /*MAIN PAGE BUTTON STYLING */
+  /*MAIN PAGE BUTTON COMPONENT STYLING */
 
   .btn {
     display: flex;

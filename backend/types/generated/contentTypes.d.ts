@@ -973,7 +973,8 @@ export interface ApiProductProduct extends Schema.CollectionType {
         'Prijenosne priklju\u010Dnice',
         'Grlo',
         'Zvono',
-        'Happy'
+        'Happy',
+        'Vre\u0107ice za usisiva\u010De'
       ]
     >;
     subCate: Attribute.Enumeration<

@@ -9,11 +9,12 @@ const GsapTextBanner = lazy(() => import('@/components/home/GsapTextBanner'));
 const ImageCarousel = lazy(() => import('@/components/home/ImageCarousel'));
 const ProductSection = lazy(() => import('@/components/home/ProductSection'));
 const BannerThree = lazy(() => import('@/components/home/BannerThree'));
+const BannerFour = lazy(() => import('@/components/home/BannerFour'));
 const CardSection = lazy(() => import('@/components/home/CardSection'));
 
 export default function Home() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Učitavam...</div>}>
       <Banner />
       <BannerTwo />
       <GsapTextBanner />
@@ -21,6 +22,7 @@ export default function Home() {
       <ProductSection />
       <BannerThree />
       <CategorySection />
+      <BannerFour />
       <BestSellers />
       <CardSection />
       <BlogSection />
