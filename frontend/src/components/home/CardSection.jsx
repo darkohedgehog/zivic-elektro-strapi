@@ -16,7 +16,7 @@ import { PiCertificateBold } from "react-icons/pi";
 const CardSection = memo( () => {
   return (
     <div className='py-12 flex flex-col md:flex-row items-center justify-evenly my-6 mx-auto gap-8'>
-        <div className="card">
+        <div className="card bg-card-bg-light dark:bg-card-bg-dark">
         <p className="flex items-center justify-start gap-2 text-accent dark:text-accentDark font-bold text-sm uppercase">
         <RiCustomerService2Line className="text-accent w-5 h-5" />
          Pozovite nas
@@ -34,7 +34,7 @@ const CardSection = memo( () => {
         032 442-992
     </p>
     </div>
-    <div className="card">
+    <div className="card bg-card-bg-light dark:bg-card-bg-dark">
         <p className="flex items-center justify-start gap-2 text-accent dark:text-accentDark font-bold text-sm uppercase">
         <TbTruckDelivery className="text-accent w-5 h-5" />
          Brza isporuka
@@ -52,7 +52,7 @@ const CardSection = memo( () => {
         Povrat novca
     </p>
     </div>
-    <div className="card">
+    <div className="card bg-card-bg-light dark:bg-card-bg-dark">
      <p className="flex items-center justify-start gap-2 text-accent dark:text-accentDark font-bold text-sm uppercase">
        <PiCertificateBold className="text-accent w-5 h-5" />
          Garancija

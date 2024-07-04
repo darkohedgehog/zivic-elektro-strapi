@@ -48,6 +48,8 @@ module.exports = {
         gray: "#747474",
         darkblue: '#0a192f',
         darkpurple: '#6a0dad',
+        'card-bg-light': '#e4d9ff',
+        'card-bg-dark': '#011638',
       },
     },
   },
