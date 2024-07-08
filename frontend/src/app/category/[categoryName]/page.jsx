@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import GlobalApi from '@/app/utils/GlobalApi';
 import FilteredProductList from '@/components/home/FilteredProductList';
 import SubCategoryList from '@/components/home/SubCategoryList';
-import Link from 'next/link';
 import { TiArrowBackOutline } from "react-icons/ti";
 
 const CategoryPage = () => {
@@ -13,6 +12,7 @@ const CategoryPage = () => {
   const categoryName = params.categoryName; // Extracting categoryName from params
   const [productList, setProductList] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     console.log("categoryName:", categoryName); // Logovanje za potvrdu categoryName
@@ -51,15 +51,13 @@ const CategoryPage = () => {
           <div>Učitavam proizvode...</div>
         )}
       <div className='flex items-center justify-center my-8'>
-      <Link 
-      href={'/shop'}>
-        <button className='button'>
+        <button className='button'
+        onClick={() => router.back()}>
           <span className='text-accent dark:text-accentDark uppercase text-sm flex items-center justify-center gap-2'>
           <TiArrowBackOutline className='w-5 h-5' />
             Nazad
             </span>
         </button>  
-      </Link>
       </div>
     </div>
   );
