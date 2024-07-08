@@ -8,6 +8,7 @@ import Layout from "@/components/Layout";
 import siteMetadata from "./utils/siteMetaData";
 
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

@@ -3,5 +3,12 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "next-sitemap.config.mjs",
+    "next-sitemap.config.js"
+  ]
 }
