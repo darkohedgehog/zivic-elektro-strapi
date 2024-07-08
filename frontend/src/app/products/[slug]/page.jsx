@@ -1,15 +1,13 @@
 "use client"
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import GlobalApi from '@/app/utils/GlobalApi';
 import ProductInfo from '@/components/product/ProductInfo';
-import Head from 'next/head';
 import BreadCrump from '@/components/product/BreadCrump';
 import ProductBanner from '@/components/product/ProductBanner';
 import ProductList from '@/components/home/ProductList';
 
 const ProductPage = ({ params }) => {
-  const router = useRouter();
   const [product, setProduct] = useState(null);
   const path = usePathname();
   const [productDetail, setProductDetail] = useState(null);
@@ -47,15 +45,16 @@ const ProductPage = ({ params }) => {
 
 
   return (
-    <div className='p-5 py-20 px-10 md:px-28'>
-      <Head>
-        <title>{product?.attributes?.title} Živić-Elektro</title>
+    <>
+    <head>
+       <title>{product?.attributes?.title} Živić-Elektro</title>
         <meta name="description" content={product?.attributes?.description} />
         <meta property="og:title" content={product?.attributes?.title} />
         <meta property="og:description" content={product?.attributes?.description} />
         <meta property="og:image" content={product?.attributes?.thumbnail?.data[0]?.attributes?.url} />
         <meta property="og:url" content={`https://zivic-elektro.hr/products/${product?.attributes?.slug}`} />
-      </Head>
+      </head>
+    <div className='p-5 py-20 px-10 md:px-28'>
       <BreadCrump path={path} />
       {productDetail ? (
         <div className='grid grid-cols-1 sm:grid-cols-2 mt-10 gap-5 sm:gap-5 justify-evenly'>
@@ -74,6 +73,7 @@ const ProductPage = ({ params }) => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -113,6 +113,15 @@ const ProductInfo = ({ product }) => {
        </span> 
       </button>
       </Link>
+     
+        <button className='button mt-8'
+        onClick={() => router.back()}>
+          <span className='text-accent dark:text-accentDark uppercase text-sm flex items-center justify-center gap-2'>
+          <IoReturnDownBackOutline className='w-5 h-5' />
+            Nazad
+            </span>
+        </button>  
+
       <Link href={'/products'}
       className='mt-14 flex gap-4 text-accent dark:text-accentDark items-center text-xl font-semibold'>
       <IoReturnDownBackOutline className='w-5 h-5' />
