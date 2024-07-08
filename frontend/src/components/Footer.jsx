@@ -79,7 +79,13 @@ const Footer = () => {
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <span className="block text-sm text-gray-500 sm:text-center dark:text-accentDark"> 
         © {new Date().getFullYear()} Živić-Elektro. Sva prava zadržana. 
-        <Link href={"/"} className="hover:underline"></Link> 
+        <Link href={"/"} className="hover:underline">
+        </Link> 
+        <div className="flex items-center justify-center gap-2 my-6 text-sm text-gray-500 sm:text-center dark:text-accentDark"> 
+         <Link href={'/sitemap.xml'} target='blank'>
+            sitemap.xml
+         </Link>
+        </div>
         </span>
     </div>
 </footer>
