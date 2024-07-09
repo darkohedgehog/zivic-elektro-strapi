@@ -52,9 +52,11 @@ const ContactUs = memo (() => {
                   <h3 className="text-lg font-medium text-accent dark:text-darkpurple">
                     Kontakt:
                     </h3>
-                  <p className="mt-1 text-gray">
+                  <Link 
+                   href={'mailto:prodaja@zivic-elektro.com'} target='blank'
+                  className="mt-1 text-gray">
                     Email: prodaja@zivic-elektro.com
-                  </p>
+                  </Link>
                   <p className="mt-1 text-gray">
                     Telefon: +385 32 442-992
                     </p>
