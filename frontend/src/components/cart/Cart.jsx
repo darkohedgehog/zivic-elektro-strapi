@@ -8,7 +8,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
 
   return (
-    <div className='h-[350px] w-[300px] bg-gray/75 z-10 rounded-md absolute mx-auto top-14 p-5 border shadow-sm overflow-auto text-darkblue dark:text-accentDark'>
+    <div className='h-[350px] w-[300px] bg-gray/80 z-10 rounded-md absolute mx-auto top-14 mt-12 lg:mt-4 p-5 border shadow-sm overflow-auto text-darkblue dark:text-accent'>
       <div className="mt-4 space-y-6">
         <CartPreview />
       </div>
