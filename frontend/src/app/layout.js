@@ -74,6 +74,8 @@ export default function RootLayout({ children }) {
           <meta name="twitter:image" content={metadata.twitter.images[0]} />
           <meta name="twitter:site" content={metadata.twitter.site} />
           <meta name="twitter:creator" content={metadata.twitter.creator} />
+          <link rel="manifest" href="/api/manifest" />
+          <meta name="theme-color" content="#000000" />
           <link rel="canonical" href={metadata.metadataBase} />
         </head>
         <body className={`${inter.className} min-h-screen transition-colors duration-300 bg-gradient-light dark:bg-gradient-dark`}>
