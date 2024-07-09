@@ -13,10 +13,10 @@ const BestSellers = memo(() => {
   useEffect(() => {
     const fetchBestSellers = async () => {
       try {
-        console.log("Fetching bestsellers"); // Log za debagovanje
+       // console.log("Fetching bestsellers"); // Log za debagovanje
         const resp = await GlobalApi.getBestSellers();
-        console.log("API Response:", resp); // Log za debagovanje API odgovora
-        console.log("Fetched Bestsellers:", resp.data.data); // Log za debagovanje
+       // console.log("API Response:", resp); // Log za debagovanje API odgovora
+       // console.log("Fetched Bestsellers:", resp.data.data); // Log za debagovanje
         setProductList(resp.data.data);
       } catch (error) {
         console.error("Error fetching bestsellers:", error);

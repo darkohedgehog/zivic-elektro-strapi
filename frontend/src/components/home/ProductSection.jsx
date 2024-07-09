@@ -19,7 +19,7 @@ const ProductSection = memo(() => {
   const getLatestProducts_ = async () => {
     try {
       const resp = await GlobalApi.getLatestProducts();
-      console.log(resp.data.data);
+      //console.log(resp.data.data);
       setProductList(resp.data.data);
     } catch (error) {
       console.error('Failed to fetch products:', error);

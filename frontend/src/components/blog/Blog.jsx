@@ -15,7 +15,7 @@ const Blog = () => {
     try {
       const response = await GlobalApi.getBlogs();
       setBlogs(response.data.data);
-      console.log(response.data.data); // Logovanje podataka
+      //console.log(response.data.data); // Logovanje podataka
     } catch (error) {
       console.error("Error fetching blogs:", error);
     }

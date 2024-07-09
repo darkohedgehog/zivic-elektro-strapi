@@ -19,7 +19,7 @@ const getProductListByCategory = (category) => axiosClient.get('/products?filter
 
 const getProductListByCategoryName = async (categoryName) => {
     const url = `/products?filters[category][$eq]=${categoryName}&populate=*`;
-    console.log(`Fetching products from URL: ${url}`); // Logovanje URL-a za debagovanje
+   // console.log(`Fetching products from URL: ${url}`);
     try {
         return await axiosClient.get(url);
     } catch (error) {
@@ -32,7 +32,7 @@ const getProductListByCategoryName = async (categoryName) => {
 
 const getSubCategoriesByCategory = (categoryName) => {
     const url = `/subcategories?filters[cate][$eq]=${categoryName}&populate=*`;
-    console.log(`Fetching subcategories from URL: ${url}`); // Logovanje URL-a za debagovanje
+   // console.log(`Fetching subcategories from URL: ${url}`); 
     return axiosClient.get(url).catch(error => {
         console.error("API call error:", error.response); // Logovanje odgovora sa greškom
         throw error;
@@ -41,7 +41,7 @@ const getSubCategoriesByCategory = (categoryName) => {
 
 const getProductListByCategoryAndSubCategory = async (categoryName, subCategoryName) => {
     const url = `/products?filters[category][$eq]=${categoryName}&filters[subCate][$eq]=${subCategoryName}&populate=*`;
-    console.log(`Fetching products from URL: ${url}`); // Logovanje URL-a za debagovanje
+    //console.log(`Fetching products from URL: ${url}`);
     try {
         return await axiosClient.get(url);
     } catch (error) {
@@ -54,7 +54,7 @@ const getProductListByCategoryAndSubCategory = async (categoryName, subCategoryN
 
 const getBestSellers = async () => {
     const url = `/products?filters[bestSeller][$eq]=true&populate=*`;
-    console.log(`Fetching bestsellers from URL: ${url}`); // Logovanje URL-a za debagovanje
+   // console.log(`Fetching bestsellers from URL: ${url}`); 
     try {
         return await axiosClient.get(url);
     } catch (error) {

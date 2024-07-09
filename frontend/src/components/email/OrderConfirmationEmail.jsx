@@ -78,7 +78,7 @@ const OrderConfirmationEmail = ({ orderData }) => {
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>{paymentMethod}</td>
               </tr>
               <tr>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>Ukupan iznos:</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>Ukupan iznos sa dostavom:</td>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>{totalAmount.toFixed(2)} EUR</td>
               </tr>
               <tr>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import Image from 'next/image';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { CiTrash } from 'react-icons/ci';

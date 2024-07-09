@@ -19,7 +19,7 @@ const CategorySection = memo(() => {
   const getLatestCategories_ = async () => {
     try {
       const resp = await GlobalApi.getLatestCategories();
-      console.log(resp.data.data);
+      //console.log(resp.data.data);
       setCategoryList(resp.data.data);
     } catch (error) {
       console.error('Failed to fetch categories:', error);

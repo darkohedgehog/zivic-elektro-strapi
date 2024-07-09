@@ -1,10 +1,10 @@
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import ProductItem from './ProductItem'; // Uvezi komponentu ProductItem
+import ProductItem from './ProductItem';
 
 const BestSellersCarousel = ({ productList }) => {
     if (!productList) {
-        return <div>Učitavam proizvode...</div>; // Or handle the undefined state appropriately
+        return <div>Učitavam proizvode...</div>; // Handle the undefined state appropriately
     }
 
     return (

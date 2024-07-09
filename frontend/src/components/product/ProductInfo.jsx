@@ -42,7 +42,7 @@ const ProductInfo = ({ product }) => {
               }
             }
           };
-          console.log('New product added to cart:', newProduct); // Dodato logovanje za novi proizvod
+         // console.log('New product added to cart:', newProduct); 
           dispatch(addToCart(newProduct));
         }
       }, (error) => {

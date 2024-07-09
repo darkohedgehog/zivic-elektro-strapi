@@ -98,7 +98,7 @@ const Cash = () => {
         throw new Error('Failed to send email');
       }
 
-      console.log('Confirmation email sent successfully');
+     // console.log('Confirmation email sent successfully');
     } catch (error) {
       console.error('Error sending confirmation email:', error);
     }
@@ -107,10 +107,10 @@ const Cash = () => {
   const handlePayment = async () => {
     try {
       const updatedOrderData = { ...orderData, paymentMethod: 'Cash On Delivery' };
-      console.log('Order data before sending:', updatedOrderData);
+      //console.log('Order data before sending:', updatedOrderData);
 
       const response = await GlobalApi.createOrder(updatedOrderData);
-      console.log('Order created:', response.data);
+      //console.log('Order created:', response.data);
       await GlobalApi.clearCart();
       dispatch(clearCart());
 

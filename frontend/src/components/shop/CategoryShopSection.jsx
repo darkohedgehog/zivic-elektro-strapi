@@ -17,7 +17,7 @@ const CategoryShopSection = () => {
 
     const getLatestCategories_= () => {
         GlobalApi.getLatestCategories().then(resp => {
-            console.log(resp.data.data);
+            //console.log(resp.data.data);
             setCategoryShopList(resp.data.data)
         })
     }

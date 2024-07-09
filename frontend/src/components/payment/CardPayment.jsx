@@ -158,10 +158,10 @@ const CardPayment = () => {
   const handlePayment = async () => {
     try {
       const updatedOrderData = { ...orderData, paymentMethod: 'Card' };
-      console.log('Order data before sending:', updatedOrderData);
+     // console.log('Order data before sending:', updatedOrderData);
   
       const response = await GlobalApi.createOrder(updatedOrderData);
-      console.log('Order created:', response.data);
+     // console.log('Order created:', response.data);
       await GlobalApi.clearCart();
       dispatch(clearCart());
   

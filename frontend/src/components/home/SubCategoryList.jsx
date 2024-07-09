@@ -10,7 +10,7 @@ const SubCategoryList = ({ subCategories, categoryName }) => {
       {subCategories.map((subCategory, index) => {
         const thumbnailUrl = subCategory.attributes.thumbnail?.data[0]?.attributes.url
           ? baseUrl + subCategory.attributes.thumbnail.data[0].attributes.url
-          : '/default-thumbnail.jpg'; // Putanja do podrazumevane slike ako thumbnail nije dostupan
+          : '/social-banner.png'; // Putanja do podrazumevane slike ako thumbnail nije dostupan
 
         return (
           <Link key={index} href={`/category/${categoryName}/${subCategory.attributes.subCate}`}>
