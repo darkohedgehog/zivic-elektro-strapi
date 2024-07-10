@@ -37,7 +37,7 @@ const OrderConfirmationEmail = ({ orderData }) => {
             style={{ margin: '0 auto' }}
           />
           <Heading>Vaša narudžba je uspješno kreirana</Heading>
-          <Text>Poštovani {firstName} {lastName},</Text>
+          <Text>Poštovani/a {firstName} {lastName},</Text>
           <Text>Hvala Vam na narudžbi! Ovo su detalji Vaše narudžbe:</Text>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <tbody>

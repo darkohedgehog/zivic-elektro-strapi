@@ -65,7 +65,7 @@ const CartPreview = () => {
                 alt={productData?.attributes?.title || 'Product Image'}
                 width={200}
                 height={200}
-                className="size-16 rounded object-cover"
+                className="size-16 rounded object-cover my-2"
               />
             ) : (
               <div className="w-12 h-12 bg-gray-200 flex items-center justify-center">
@@ -74,15 +74,15 @@ const CartPreview = () => {
             )}
 
             <div>
-              <h3 className="text-sm text-gray-900">{productData?.attributes?.title}</h3>
+              <h3 className="text-sm text-gray">{productData?.attributes?.title}</h3>
 
-              <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+              <dl className="mt-0.5 space-y-px text-[10px] text-gray">
                 <div>
                   <dt className="inline">{productData?.attributes?.category}</dt>
                 </div>
 
                 <div>
-                  <dt className="inline">€{productData?.attributes?.price}</dt>
+                  <dt className="inline text-accent">€{productData?.attributes?.price}</dt>
                 </div>
               </dl>
             </div>
