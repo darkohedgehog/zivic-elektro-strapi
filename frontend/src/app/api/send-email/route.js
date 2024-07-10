@@ -39,11 +39,11 @@ export async function POST(req) {
 
     // Slanje na primarnu adresu
     await transporter.sendMail(mailOptionsPrimary);
-    console.log('Email sent to primary address');
+   // console.log('Email sent to primary address');
 
     // Slanje na sekundarnu adresu
     await transporter.sendMail(mailOptionsSecondary);
-    console.log('Email sent to secondary address');
+    //console.log('Email sent to secondary address');
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
