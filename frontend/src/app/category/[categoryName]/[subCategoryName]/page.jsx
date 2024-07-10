@@ -13,13 +13,13 @@ const SubCategoryPage = () => {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    console.log("categoryName:", categoryName); // Logovanje za potvrdu categoryName
-    console.log("subCategoryName:", subCategoryName); // Logovanje za potvrdu subCategoryName
+    //console.log("categoryName:", categoryName);
+   // console.log("subCategoryName:", subCategoryName);
     if (categoryName && subCategoryName) {
-      console.log(`Fetching products for category: ${categoryName} and subcategory: ${subCategoryName}`); // Log za debagovanje
+      console.log(`Fetching products for category: ${categoryName} and subcategory: ${subCategoryName}`);
       GlobalApi.getProductListByCategoryAndSubCategory(categoryName, subCategoryName).then(resp => {
-        console.log("API Response:", resp); // Log za debagovanje API odgovora
-        console.log("Fetched Products:", resp.data.data); // Log za debagovanje
+        //console.log("API Response:", resp); 
+        //console.log("Fetched Products:", resp.data.data); 
         setProductList(resp.data.data);
       }).catch(error => {
         console.error("Error fetching product list by category and subcategory:", error);

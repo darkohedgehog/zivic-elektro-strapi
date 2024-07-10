@@ -17,19 +17,19 @@ const CategoryPage = () => {
   useEffect(() => {
     console.log("categoryName:", categoryName); // Logovanje za potvrdu categoryName
     if (categoryName === "Kombo") {
-      console.log(`Fetching subcategories for category name: ${categoryName}`); // Log za debagovanje
+      //console.log(`Fetching subcategories for category name: ${categoryName}`);
       GlobalApi.getSubCategoriesByCategory(categoryName).then(resp => {
         const subCategoriesData = resp.data.data;
-        console.log("Fetched SubCategories:", subCategoriesData); // Log za debagovanje
+        //console.log("Fetched SubCategories:", subCategoriesData);
         setSubCategories(subCategoriesData);
       }).catch(error => {
         console.error("Error fetching subcategories by category:", error);
       });
     } else if (categoryName) {
-      console.log(`Fetching products for category name: ${categoryName}`); // Log za debagovanje
+      //console.log(`Fetching products for category name: ${categoryName}`);
       GlobalApi.getProductListByCategoryName(categoryName).then(resp => {
-        console.log("API Response:", resp); // Log za debagovanje API odgovora
-        console.log("Fetched Products:", resp.data.data); // Log za debagovanje
+        //console.log("API Response:", resp); 
+       // console.log("Fetched Products:", resp.data.data); 
         setProductList(resp.data.data);
       }).catch(error => {
         console.error("Error fetching product list by category:", error);
