@@ -12,6 +12,8 @@ const BannerThree = lazy(() => import('@/components/home/BannerThree'));
 const BannerFour = lazy(() => import('@/components/home/BannerFour'));
 const CardSection = lazy(() => import('@/components/home/CardSection'));
 
+const CookieConsent = lazy(() => import('@/components/cookies/CookieConsent'), { ssr: false });
+
 export default function Home() {
   return (
     <Suspense fallback={<div>Učitavam...</div>}>
@@ -26,6 +28,7 @@ export default function Home() {
       <BestSellers />
       <CardSection />
       <BlogSection />
+      <CookieConsent />
     </Suspense>
   );
 }
