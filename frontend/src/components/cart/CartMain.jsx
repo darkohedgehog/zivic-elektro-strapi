@@ -238,7 +238,9 @@ const CartMain = () => {
                   ><TbTransactionEuro className='w-6 h-6' />
                     Bankarska transakcija
                   </Link>
-                  <Link
+                  {/* CARD PAYMENT */}
+                  {/*
+                   <Link
                     href="/payment-stripe"
                     className="text-[#F7F7F7] bg-accent hover:bg-[#C9A0DC] focus:ring-4 
                     focus:outline-none focus:ring-[#9A4EAE] font-medium rounded-lg 
@@ -246,6 +248,7 @@ const CartMain = () => {
                   ><FaCcMastercard className='w-6 h-6' />
                     Plaćanje karticom
                   </Link>
+                   */}
                 </div>
               </div>
             </div>

@@ -43,7 +43,7 @@ const BlogDetail = () => {
         <meta property="og:title" content={blog?.attributes?.title} />
         <meta property="og:description" content={blog?.attributes?.description} />
         <meta property="og:image" content={imageUrl} />
-        <meta property="og:url" content={`https://zivic-elektro.hr/blog/${blog?.attributes?.slug}`} />
+        <meta property="og:url" content={`https://zivic-elektro.shop/blog/${blog?.attributes?.slug}`} />
       </head>
    
     <div className='px-10 md:px-20 py-28'>

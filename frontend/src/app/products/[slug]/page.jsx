@@ -52,7 +52,7 @@ const ProductPage = ({ params }) => {
         <meta property="og:title" content={product?.attributes?.title} />
         <meta property="og:description" content={product?.attributes?.description} />
         <meta property="og:image" content={product?.attributes?.thumbnail?.data[0]?.attributes?.url} />
-        <meta property="og:url" content={`https://zivic-elektro.hr/products/${product?.attributes?.slug}`} />
+        <meta property="og:url" content={`https://zivic-elektro.shop/products/${product?.attributes?.slug}`} />
       </head>
     <div className='p-5 py-20 px-10 md:px-28'>
       <BreadCrump path={path} />
