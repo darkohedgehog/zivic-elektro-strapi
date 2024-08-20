@@ -4,8 +4,16 @@ const nextConfig = {
   images: {
       remotePatterns: [
         {
+          protocol: "http",
+          hostname: "localhost",
+        },
+        {
           protocol: "https",
           hostname: "zivic-elektro.shop",
+        },
+        {
+          protocol: "https",
+          hostname: "api.zivic-elektro.shop",
         },
         {
           protocol: "https",

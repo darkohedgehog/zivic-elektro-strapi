@@ -1,8 +1,7 @@
 const { default: axios } = require("axios");
 
 const apiKey = process.env.NEXT_PUBLIC_REST_API_KEY;
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://zivic-elektro.shop:1337/api';
-console.log('API URL:', apiUrl);
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.zivic-elektro.shop/api';
 
 
 const axiosClient = axios.create({
