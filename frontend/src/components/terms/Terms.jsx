@@ -9,7 +9,7 @@ const Terms = () => {
     <p className='text-gray sm:flex gap-2 text-clip'>
     Putem web trgovine 
     <span className='text-accent dark:text-accentDark'>
-    www.zivic-elektro.hr
+    www.zivic-elektro.shop
     </span>  
     kupcu je omogućena kupnja svih proizvoda koji se nalaze na navedenoj web trgovini.
     </p>
@@ -73,10 +73,10 @@ const Terms = () => {
     Newsletter
    </h3>
    <p className='mt-3 text-gray'>
-   Prilikom registracije na www.zivic-elektro.hr web trgovinu svaki korisnik se automatski prijavljuje na newsletter. Moguće je opozvati dolazak newslettera na način da kada se primi prvi newsletter stisnete na link – ovdje se odjavi sa newsletter-a.
+   Prilikom registracije na www.zivic-elektro.shop web trgovinu svaki korisnik se automatski prijavljuje na newsletter. Moguće je opozvati dolazak newslettera na način da kada se primi prvi newsletter stisnete na link – ovdje se odjavi sa newsletter-a.
    </p>
    <p className='font-semibold text-accent dark:text-accentDark mt-3 uppercase'>
-   www.zivic-elektro.hr ima pravo u svakom trenutku izmijeniti ili dopuniti sadržaj Internet trgovine kao i Uvjete kupnje.
+   www.zivic-elektro.shop ima pravo u svakom trenutku izmijeniti ili dopuniti sadržaj Internet trgovine kao i Uvjete kupnje.
    </p>
    <p className='font-semibold text-accent dark:text-accentDark mt-3'>
    Za sva dodatna pitanja slobodno nas kontaktirajte putem e-maila: prodaja@zivic-elektro.com.
