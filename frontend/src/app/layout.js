@@ -52,10 +52,7 @@ const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider 
-    localization={hrTranslations}
-    proxyUrl={process.env.NEXT_PUBLIC_CLERK_PROXY_URL}
-    >
+    <ClerkProvider localization={hrTranslations}>
       <html lang="hr" suppressHydrationWarning>
       <head>
           <meta name="description" content={metadata.description} />
