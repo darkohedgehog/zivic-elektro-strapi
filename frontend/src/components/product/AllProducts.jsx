@@ -2,37 +2,48 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ProductItem from '../home/ProductItem';
 import GlobalApi from '@/app/utils/GlobalApi';
 
-
 const AllProducts = ({ initialProductList }) => {
   const [products, setProducts] = useState(initialProductList);
   const [page, setPage] = useState(1);
   const productsPerPage = 24;
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true); // Novo stanje za praćenje da li ima još proizvoda
+  const [hasMore, setHasMore] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [priceOrder, setPriceOrder] = useState('');
 
+  // Funkcija za učitavanje proizvoda
   const loadProducts = useCallback(async (reset = false) => {
-    if (!hasMore) return; // Ako nema više proizvoda, prekini učitavanje
+    if (loading || !hasMore) return; // Sprečavanje ponovnog učitavanja ako više nema proizvoda ili ako je već u toku
 
     setLoading(true);
     try {
       const start = reset ? 0 : products.length;
       const response = await GlobalApi.getProducts(productsPerPage, start, categoryFilter, priceOrder);
       const newProducts = response.data.data;
-      
-      if (newProducts.length < productsPerPage) {
-        setHasMore(false); // Ako smo dobili manje proizvoda od limit-a, nema više za učitavanje
-      }
 
+      // Resetovanje ili dodavanje novih proizvoda
       setProducts(prevProducts => reset ? newProducts : [...prevProducts, ...newProducts]);
+
+      // Provera da li je kraj liste dostignut
+      if (newProducts.length < productsPerPage) {
+        setHasMore(false);
+      } else {
+        setPage(prevPage => prevPage + 1);
+      }
     } catch (error) {
       console.error('Error fetching products:', error);
     }
     setLoading(false);
-  }, [categoryFilter, priceOrder, products.length, hasMore]);
+  }, [categoryFilter, priceOrder, products.length, hasMore, loading]);
 
-  // Lazy loading on scroll
+  // Učitavanje proizvoda na osnovu filtera i sortiranja
+  useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    loadProducts(true); // Resetovanje liste proizvoda prilikom promene filtera ili sortiranja
+  }, [categoryFilter, priceOrder, loadProducts]);
+
+  // Lazy loading prilikom skrolovanja
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 50) {
@@ -44,12 +55,6 @@ const AllProducts = ({ initialProductList }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loadProducts]);
 
-  // Reload products when filter or sort order changes
-  useEffect(() => {
-    setHasMore(true); // Resetuj hasMore kada se filter ili sortiranje promene
-    loadProducts(true); // Reset the product list and load new filtered/sorted products
-  }, [categoryFilter, priceOrder]);
-
   return (
     <div className='w-full'>
       <div className='my-8 gap-2 grid grid-cols-2 lg:grid lg:w-[300px]'>
@@ -57,6 +62,7 @@ const AllProducts = ({ initialProductList }) => {
           onChange={(e) => {
             setCategoryFilter(e.target.value);
             setPage(1);
+            setHasMore(true);
           }} 
           className='p-2 border border-gray rounded-md bg-transparent text-accent dark:text-accentDark text-sm'
         >
@@ -77,6 +83,7 @@ const AllProducts = ({ initialProductList }) => {
           onChange={(e) => {
             setPriceOrder(e.target.value);
             setPage(1);
+            setHasMore(true);
           }} 
           className='p-2 border border-gray rounded-md bg-transparent text-accent dark:text-accentDark text-sm'
         >
@@ -92,8 +99,6 @@ const AllProducts = ({ initialProductList }) => {
           </div>
         ))}
       </div>
-      {loading && <div className='flex items-center justify-center text-gray'>Učitavam...</div>}
-      {!hasMore && <div className='flex items-center justify-center text-gray mt-8'>Nema više proizvoda...</div>}
     </div>
   );
 };

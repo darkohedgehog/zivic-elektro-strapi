@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import GlobalApi from '@/app/utils/GlobalApi';
@@ -8,50 +7,49 @@ import SubCategoryList from '@/components/home/SubCategoryList';
 import { TiArrowBackOutline } from "react-icons/ti";
 
 const CategoryPage = () => {
-  const params = useParams(); // Using useParams to get params from URL
-  const categoryName = params.categoryName; // Extracting categoryName from params
+  const params = useParams(); 
+  const categoryName = params.categoryName; 
   const [productList, setProductList] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [page, setPage] = useState(1);
+  const productsPerPage = 24;
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true); // Praćenje da li ima više proizvoda
+  const [hasMore, setHasMore] = useState(true);
   const router = useRouter();
 
-  const loadProducts = useCallback(async () => {
-    if (!hasMore || loading) return; // Ako nema više proizvoda ili već učitava, prekini
+  // Funkcija za učitavanje proizvoda
+  const loadProducts = useCallback(async (reset = false) => {
+    if (loading || !hasMore) return; // Sprečavanje ponovnog učitavanja ako više nema proizvoda ili ako je već u toku
 
     setLoading(true);
     try {
-      const start = (page - 1) * 24;
-      const response = await GlobalApi.getProductListByCategoryName(categoryName, 24, start);
+      const start = reset ? 0 : productList.length;
+      const response = await GlobalApi.getProductListByCategoryName(categoryName, productsPerPage, start);
       const newProducts = response.data.data;
 
-      setProductList(prevProducts => [...prevProducts, ...newProducts]);
+      // Resetovanje ili dodavanje novih proizvoda
+      setProductList(prevProducts => reset ? newProducts : [...prevProducts, ...newProducts]);
 
-      if (newProducts.length < 24) {
-        setHasMore(false); // Ako je broj vraćenih proizvoda manji od limita, prestani sa učitavanjem
+      // Provera da li je kraj liste dostignut
+      if (newProducts.length < productsPerPage) {
+        setHasMore(false);
+      } else {
+        setPage(prevPage => prevPage + 1);
       }
-
-      setPage(prevPage => prevPage + 1);
     } catch (error) {
-      console.error("Error fetching product list by category:", error);
+      console.error('Error fetching products:', error);
     }
     setLoading(false);
-  }, [categoryName, page, hasMore, loading]);
+  }, [categoryName, productList.length, hasMore, loading]);
 
+  // Učitavanje proizvoda na osnovu promene kategorije
   useEffect(() => {
-    setPage(1); // Resetovanje page na 1 kada se kategorija promeni
-    setProductList([]); // Resetovanje liste proizvoda kada se kategorija promeni
-    setHasMore(true); // Ponovno omogućavanje učitavanja kada se kategorija promeni
-  }, [categoryName]);
-
-  useEffect(() => {
-    if (categoryName) {
-      loadProducts(); // Učitavanje početnih proizvoda
-    }
+    setPage(1);
+    setHasMore(true);
+    loadProducts(true); // Resetovanje liste proizvoda prilikom promene kategorije
   }, [categoryName, loadProducts]);
 
-  // Lazy loading on scroll
+  // Lazy loading prilikom skrolovanja
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 50) {
@@ -63,6 +61,7 @@ const CategoryPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loadProducts]);
 
+  // Učitavanje subkategorija ako je kategorija "Kombo"
   useEffect(() => {
     if (categoryName === "Kombo") {
       GlobalApi.getSubCategoriesByCategory(categoryName).then(resp => {
@@ -87,8 +86,7 @@ const CategoryPage = () => {
       ) : (
         <div>Učitavam proizvode...</div>
       )}
-      {loading && <div className='flex items-center justify-center text-gray'>Učitavam...</div>}
-      {!hasMore && <div className='flex items-center justify-center text-gray mt-8'>Nema više proizvoda</div>}
+      
       <div className='flex items-center justify-center my-8'>
         <button className='button' onClick={() => router.back()}>
           <span className='text-accent dark:text-accentDark uppercase text-sm flex items-center justify-center gap-2'>
