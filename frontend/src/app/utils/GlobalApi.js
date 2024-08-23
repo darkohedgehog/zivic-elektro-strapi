@@ -18,16 +18,11 @@ const getProductById = (id) => axiosClient.get('/products/'+id+'?populate=*');
 //Get product list by category
 const getProductListByCategory = (category) => axiosClient.get('/products?filters[category][$eq]='+category+"&populate=*");
 
-const getProductListByCategoryName = async (categoryName) => {
-    const url = `/products?filters[category][$eq]=${categoryName}&populate=*`;
-   // console.log(`Fetching products from URL: ${url}`);
-    try {
-        return await axiosClient.get(url);
-    } catch (error) {
-        console.error("API call error:", error.response); // Logovanje odgovora sa greškom
-        throw error;
-    }
-}
+const getProductListByCategoryName = async (categoryName, limit = 24, start = 0) => {
+    const url = `/products?filters[category][$eq]=${categoryName}&_limit=${limit}&_start=${start}&populate=*`;
+    return await axiosClient.get(url);
+};
+
 
 // Get subCategory
 
@@ -98,6 +93,11 @@ const clearCart = async () => {
   // Blog
   const getBlogs = () => axiosClient.get('/blogs?populate=*');
   const getBlogBySlug = (slug) => axiosClient.get(`/blogs?filters[slug][$eq]=${slug}&populate=*`);
+
+  const getProducts = async (limit = 24, start = 0) => {
+    const url = `/products?_limit=${limit}&_start=${start}&populate=*`;
+    return await axiosClient.get(url);
+};
   
 
 export default {
@@ -119,4 +119,5 @@ export default {
     getUserOrders,
     getBlogs,
     getBlogBySlug,
+    getProducts,
 };
