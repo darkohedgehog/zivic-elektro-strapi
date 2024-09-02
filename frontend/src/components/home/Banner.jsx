@@ -32,9 +32,9 @@ const Banner = () => {
     <div className="relative mb-7">
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div className="text-center banner-content">
-          <h1 className="text-4xl font-bold text-[#F7F7F7] mb-3 uppercase">Najbolji elektromaterijal na dohvat ruke</h1>
-          <p className="text-xl text-[#F7F7F7]">
-            Sve što vam treba za profesionalne ili kućne elektroinstalacije.
+          <h1 className="text-4xl font-bold text-accent mb-3 uppercase">Najbolji elektromaterijal na dohvat ruke</h1>
+          <p className="text-3xl text-[#fef5ef] font-bold text-pretty">
+            Sve što vam treba za profesionalne ili kućne elektroinstalacije
           </p>
         </div>
       </div>
