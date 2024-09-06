@@ -7,12 +7,10 @@ import hrTranslations from "./(auth)/translationHR";
 import Layout from "@/components/Layout";
 import siteMetadata from "./utils/siteMetaData";
 
-
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: siteMetadata.siteUrl, // Use plain string instead of URL object
+  metadataBase: siteMetadata.siteUrl, 
   title: {
     template: `%s | ${siteMetadata.title}`,
     default: siteMetadata.title,
@@ -23,8 +21,15 @@ export const metadata = {
     description: siteMetadata.description,
     url: siteMetadata.siteUrl,
     siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
-    locale: "hr_HR",
+    images: [
+      {
+        url: `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`, // Full URL for social banner
+        width: 1200, // Default width for social banners
+        height: 630, // Default height for social banners
+        alt: siteMetadata.title,
+      },
+    ],
+    locale: siteMetadata.locale,
     type: "website",
   },
   robots: {
@@ -42,7 +47,9 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
+    description: siteMetadata.description,
+    images: [`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`], // Full URL for social banner
+    site: '@Zivic_Darko', // Update with your Twitter handle
   },
 };
 
@@ -53,9 +60,12 @@ const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider localization={hrTranslations}>
-      <html lang="hr" suppressHydrationWarning>
-      <head>
+      <html lang={siteMetadata.language} suppressHydrationWarning>
+        <head>
+          {/* General Meta Tags */}
           <meta name="description" content={metadata.description} />
+          
+          {/* Open Graph Meta Tags */}
           <meta property="og:title" content={metadata.openGraph.title} />
           <meta property="og:description" content={metadata.openGraph.description} />
           <meta property="og:url" content={metadata.openGraph.url} />
@@ -66,22 +76,30 @@ export default function RootLayout({ children }) {
           <meta property="og:image:alt" content={metadata.openGraph.images[0].alt} />
           <meta property="og:locale" content={metadata.openGraph.locale} />
           <meta property="og:type" content={metadata.openGraph.type} />
-          <meta name="robots" content="index, follow" />
-          <meta name="googlebot" content="index, follow, noimageindex, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+          
+          {/* Twitter Meta Tags */}
           <meta name="twitter:card" content={metadata.twitter.card} />
           <meta name="twitter:title" content={metadata.twitter.title} />
           <meta name="twitter:description" content={metadata.twitter.description} />
           <meta name="twitter:image" content={metadata.twitter.images[0]} />
           <meta name="twitter:site" content={metadata.twitter.site} />
-          <meta name="twitter:creator" content={metadata.twitter.creator} />
-          <link rel="manifest" href="/api/manifest" />
-          <meta name="theme-color" content="#000000" />
+
+          {/* Robots and Google Bot Instructions */}
+          <meta name="robots" content="index, follow" />
+          <meta name="googlebot" content="index, follow, noimageindex, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+
+          {/* Canonical URL */}
           <link rel="canonical" href={metadata.metadataBase} />
+
+          {/* Favicon */}
+          <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/icons/site.webmanifest" />
         </head>
         <body className={`${inter.className} min-h-screen transition-colors duration-300 bg-gradient-light dark:bg-gradient-dark`}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme={siteMetadata.theme}
             enableSystem
             disableTransitionOnChange>
               <Layout>
