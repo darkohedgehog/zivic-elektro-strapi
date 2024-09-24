@@ -37,10 +37,10 @@ const Privacy = () => {
      ŽIVIĆ- ELEKTRO j.d.o.o. obvezuje se pružati zaštitu osobnim podacima kupaca i korisnika usluga na način da prikuplja samo nužne, osnovne podatke o kupcima/korisnicima, a koji su nužni za ispunjenje naših obveza (podaci o ispunjenju narudžbe); informira kupce o načinu korištenja prikupljenih podataka, redovito daje kupcima mogućnost izbora o upotrebi njihovih podataka, uključujući mogućnost odluke žele li ili ne da se njihovo ime ukloni s lista koje se koriste za marketinške kampanje. Svi se podaci o korisnicima strogo čuvaju i dostupni su samo djelatnicima kojima su ti podaci nužni za obavljanje posla. Svi djelatnici ŽIVIĆ- ELEKTRO j.d.o.o. i poslovni partneri odgovorni su za poštivanje načela zaštite privatnosti.
      </p>
      <p className='mt-2'>
-     Prilikom stvaranja korisničkog računa na www.zivic-elektro.com od vas se traže pojedini osobni podaci, uključujući  ime (naziv), adresu,OIB, adresu e-pošte. Adresa e-pošte i lozinka se koristi za prijavu na portal. Vaš je račun na www.zivic-elektro.shop zaštićen je korisničkim imenom i lozinkom. Korisničko ime i lozinku sustav koristi kako bi provjerio jeste li Vi zaista pretplatnik ili korisnik portala.
+     Prilikom stvaranja korisničkog računa na www.zivic-elektro.shop od vas se traže pojedini osobni podaci, uključujući  ime (naziv), adresu,OIB, adresu e-pošte. Adresa e-pošte i lozinka se koristi za prijavu na portal. Vaš je račun na www.zivic-elektro.shop zaštićen je korisničkim imenom i lozinkom. Korisničko ime i lozinku sustav koristi kako bi provjerio jeste li Vi zaista pretplatnik ili korisnik portala.
      </p>
      <p className='mt-2'>
-     Plaćanje koje se obavlja isključivo putem otkupa prilikom preuzimanja robe od predstavnika kurirske službe ako ste fizička osoba, dok tvrtke i obrtnici mogu platiti transakcijski putem virmana po definiranim uvjetima iz kupoprodajnih ugovora. Sve cijene na www.zivic-elektro.hr su iskazane sa uračunatim PDV-om. Cijena prijevoza odnosno dostave se prikazuje u konačnom zbiru.
+     Plaćanje koje se obavlja isključivo putem otkupa prilikom preuzimanja robe od predstavnika kurirske službe ako ste fizička osoba, dok tvrtke i obrtnici mogu platiti transakcijski putem virmana po definiranim uvjetima iz kupoprodajnih ugovora. Sve cijene na www.zivic-elektro.shop su iskazane sa uračunatim PDV-om. Cijena prijevoza odnosno dostave se prikazuje u konačnom zbiru.
      </p>
      <p className='mt-2'>
      Kupac prihvaćanjem ovih uvjeta kupnje jamči da su uneseni podatci o naručitelju istiniti i ažurni.

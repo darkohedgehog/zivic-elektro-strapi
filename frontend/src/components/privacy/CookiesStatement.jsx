@@ -17,10 +17,10 @@ const CookiesStatement = () => {
     Internet stranica www.zivic-elektro.shop može koristiti kolačiće u svrhu oglašavanja vlastitih usluga ili usluga i proizvoda svojih partnera. To se prikazivanje oglasa omogućuje putem kolačića.
     </p>
     <p className='mt-2'>
-    Svi korisnici Internet stranice www.zivic-elektro.shop u svakom trenutku mogu samostalno urediti primanje kolačića putem postavki svojeg Internet-preglednika. www.zivic-elektro.hr isključuje svaku odgovornost za bilo kakav gubitak funkcionalnosti i/ili kvalitete sadržaja na www.zivic-elektro.shop u svim slučajevima odabira regulacije primanja kolačića od strane korisnika. Korištenjem Internet stranice www.zivic-elektro.shop smatra se da su korisnici u svakom trenutku upoznati i suglasni s ovim uvjetima korištenja, uključujući s odredbama o obradi podataka i mogućnostima u vezi s kolačićima.
+    Svi korisnici Internet stranice www.zivic-elektro.shop u svakom trenutku mogu samostalno urediti primanje kolačića putem postavki svojeg Internet-preglednika. www.zivic-elektro.shop isključuje svaku odgovornost za bilo kakav gubitak funkcionalnosti i/ili kvalitete sadržaja na www.zivic-elektro.shop u svim slučajevima odabira regulacije primanja kolačića od strane korisnika. Korištenjem Internet stranice www.zivic-elektro.shop smatra se da su korisnici u svakom trenutku upoznati i suglasni s ovim uvjetima korištenja, uključujući s odredbama o obradi podataka i mogućnostima u vezi s kolačićima.
     </p>
     <p className='mt-2'>
-    www.zivic-elektro.shop može prikupljti određene podatke o Korisnicima tijekom pristupanja / korištenja www.zivic-elektro.hr (IP adresa, session-cookie, ključne riječi korištene kod pretraživanja i sl.), koje koristi za analizu ponašanja Korisnika i rada sustava, kako bi poboljšao rad i funkcionalnost www.zivic-elektro.shop i njegove sadržaje dodatno usmjerio i prilagodio Korisnicima.
+    www.zivic-elektro.shop može prikupljti određene podatke o Korisnicima tijekom pristupanja / korištenja www.zivic-elektro.shop (IP adresa, session-cookie, ključne riječi korištene kod pretraživanja i sl.), koje koristi za analizu ponašanja Korisnika i rada sustava, kako bi poboljšao rad i funkcionalnost www.zivic-elektro.shop i njegove sadržaje dodatno usmjerio i prilagodio Korisnicima.
     </p>
     <p className='mt-2'>
     Pružatelj usluge se obvezuje da će u dobroj namjeri koristiti podatke pribavljene od Korisnika, te da pribavljene podatke neće distribuirati trećim osobama.
